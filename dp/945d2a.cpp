@@ -65,6 +65,26 @@ using namespace __gnu_pbds;
 
 typedef long long ll;
 
+
+
+
+/*
+    p1,p2,p3 is point of 3 people
+    p1<p2<p3 (gt)
+    2 case:
+    p1+p2 < p3 
+        -> p1 play p1 draws game with p3
+        -> p2 play p2 draws game with p3 
+        -> the res can not increase any more
+    p1 + p2 > p3 
+        -> p1> p3-p2
+        -> p1 plays p3-p2 games draw with p3 ; p1 reduce by p3-p2, p3 and p2 become equal
+        -> the rest of p1 is p1-(p3-p2) is a even due to p1+p2+p3 even
+        -> p1 point draws game is smaller tham p3 and p2, devide the draws game for p3 and p2 = (p1-p3+p2)/2
+        -> the rest of p3 and p2 is equal = p2 - (p1-(p3-p2))/2 
+        -> sum all the draw we have p1 + p2 +p3 /2
+    
+*/
 void run_case()
 {
 
