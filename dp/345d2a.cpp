@@ -1,6 +1,6 @@
-//tag greedy, 800
-#include<bits/stdc++.h>
 using namespace std;
+
+#include<bits/stdc++.h>
 
 #define NDEBUG
 
@@ -11,13 +11,9 @@ using namespace std;
 #define ppb(x) pop_back(x)
 #define FOR1(i,a,b) for(ll i=a;i<=b;++i)
 #define FOR2(i,a,b) for(ll i=a;i>=b;--i)
+//note not declare var i and cal for1,2 at same time
 #define EACH(x, a) for (auto& x: a)
 #define jj "\n"
-#define debug printf("I am here\n")
-#define space printf(" ")
-
-#define max3(a, b, c) max(a, b) > max(b, c) ? max(a, b) : max(b, c)
-#define min3(a, b, c) min(a, b) < min(b, c) ? min(a, b) : min(b, c)
 
 
 typedef long long ll;
@@ -27,28 +23,33 @@ const float pi=3.1415926535897932384626433;
 typedef pair<ll,ll> PLL;
 typedef unsigned long long  ULL;
 
+
 #define all(a) a.begin(), a.end()
 #define rall(v) v.rbegin(),v.rend()
 
 
+
 void run_case()
 {
-   ll n;
-   cin>>n;
+    ll a,b;
+    cin>>a>>b;
+    ll res=0;
+    while(a>0&& b>0)
+    {
+        if(a==1 && b==1 )break;
 
-   set<ll>s;
+        res++;
 
-   FOR1(i,1,n)
-   {
-       ll x;
-       cin>>x;
-       if(s.count(x))
-       {
-           s.insert(x+1);
-       }
-       else s.insert(x);
-   }
-   cout<<s.size();
+        if(a>b)
+        {
+            a-=2;
+            b++;
+        }
+        else {
+            b-=2;a++;
+        }
+    }
+    cout<<res;
 }
 void run_with_t()
 {
@@ -72,8 +73,8 @@ int main()
 
 
 
-    run_with_t();
-    //run_case();
+    //run_with_t();
+    run_case();
     return 0;
 }
 

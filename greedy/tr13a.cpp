@@ -1,6 +1,7 @@
-//tag greedy, 800
 #include<bits/stdc++.h>
+
 using namespace std;
+
 
 #define NDEBUG
 
@@ -11,6 +12,7 @@ using namespace std;
 #define ppb(x) pop_back(x)
 #define FOR1(i,a,b) for(ll i=a;i<=b;++i)
 #define FOR2(i,a,b) for(ll i=a;i>=b;--i)
+//note not declare var i and cal for1,2 at same time
 #define EACH(x, a) for (auto& x: a)
 #define jj "\n"
 #define debug printf("I am here\n")
@@ -30,36 +32,27 @@ typedef unsigned long long  ULL;
 #define all(a) a.begin(), a.end()
 #define rall(v) v.rbegin(),v.rend()
 
-
 void run_case()
 {
    ll n;
    cin>>n;
+   if(n==1){cout<<1<<jj<<1;return;}
+    ll res[n];
+    ll tmp=1;
+    ll x=n,i=0;
 
-   set<ll>s;
-
-   FOR1(i,1,n)
-   {
-       ll x;
-       cin>>x;
-       if(s.count(x))
-       {
-           s.insert(x+1);
-       }
-       else s.insert(x);
-   }
-   cout<<s.size();
-}
-void run_with_t()
-{
-    int t;
-    cin>>t;
-    while(t--)
+    while(x>=tmp)
     {
-        run_case();
-        cout<<jj;
+        res[i]=tmp;
+        x-=tmp;
+        i++;tmp++;
     }
+
+    if(x>0)res[i-1]+=x;
+    cout<<i<<jj;
+    for(int j=0;j<i;j++)cout<<res[j]<<" ";
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -71,9 +64,7 @@ int main()
     #endif // ONLINE_JUDGE
 
 
-
-    run_with_t();
-    //run_case();
+    run_case();
     return 0;
 }
 
