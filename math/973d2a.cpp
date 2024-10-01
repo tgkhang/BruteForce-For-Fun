@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
 #define NDEBUG
 
 #define fi first
@@ -29,55 +28,28 @@ typedef pair<ll,ll> PLL;
 typedef unsigned long long  ULL;
 
 
+
+
 #define all(a) a.begin(), a.end()
 #define rall(v) v.rbegin(),v.rend()
 #define sz(x) (int)(x).size()// ??
 
+
+
 void run_case()
 {
-    ll n,d,k;
-    cin>>n>>d>>k;
+	ll n,x,y;
+	cin>>n>>x>>y;
+	cout<<ceil(n/min(x,y));
 
-    vector <ll>ss(n+1,0),es(n+1,0);
 
-    FOR1(i,0,k-1)
-    {
-        ll l,r;
-        cin>>l>>r;
-        ss[l]++;
-        es[r]++;
-    }
-    FOR1(i,1,n)
-    {
-        ss[i]=ss[i]+ss[i-1];
-        es[i]=es[i]+es[i-1];
-    }
-
-    ll t1=-1;
-    ll t2=1e18;
-    ll res1=0,res2=0;
-    for(ll i=d;i<=n;i++)
-    {
-        ll current= ss[i]-es[i-d];
-        if(current>t1)
-        {
-            t1=current;
-            res1=i-d+1;
-        }
-        if(current<t2)
-        {
-            t2=current;
-            res2=i-d +1;
-        }
-    }   
-    cout<<res1<<" "<<res2;
 }
 void run_with_t()
 {
     int t;
     cin>>t;
     while(t--)
-    {
+  {
         run_case();
         cout<<jj;
     }
@@ -91,6 +63,8 @@ int main()
     freopen("input.inp", "r", stdin);
     //freopen("output.out", "w", stdout);
     #endif // ONLINE_JUDGE
+
+
 
     run_with_t();
     //run_case();
