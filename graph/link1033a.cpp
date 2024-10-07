@@ -1,6 +1,21 @@
-//900
+//800
+//https://codeforces.com/problemset/problem/1033/A
+
 #include<bits/stdc++.h>
+
+//typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update> indexed_set;
+//s.find_by_order(2) order_of_key(9)
 using namespace std;
+
+//special data tructure
+//#define NDEBUG
+//#include <ext/pb_ds/assoc_container.hpp>// Common file
+//using namespace __gnu_pbds;
+
+
+//#include <ext/pb_ds/tree_policy.hpp> // Including tree_order_statistics_node_update
+
+
 #define NDEBUG
 
 #define fi first
@@ -29,30 +44,27 @@ const float pi=3.1415926535897932384626433;
 typedef pair<ll,ll> PLL;
 typedef unsigned long long  ULL;
 
+
 #define all(a) a.begin(), a.end()
 #define rall(v) v.rbegin(),v.rend()
 #define sz(x) (int)(x).size()// ??
+
 void run_case()
 {
-    ll n,s;
-    cin>>n>>s;
-    ll a[n],b[n];
-    FOR1(i,0,n)cin>>a[i];
-    FOR1(i,0,n)cin>>b[i];
+	ll n,ax,ay,bx,by,cx,cy;
+	cin>>n;
+	cin>>ax>>ay>>bx>>by>>cx>>cy;
+	
+	bool res=true;
+	
+	if(bx< ax && ax < cx) res=false;
+	if(bx> ax && ax >cx) res=false;
 
-    if(a[0]==0){cout<<"NO";return;}
+	if(by< ay && ay<cy)res=false;
+	if(by>ay && ay>cy)res=false;
 
-    if(a[s-1]==1){cout<<"YES";return;}
-
-    if(b[s-1]==0){cout<<"NO";return;}
-    
-
-    for(ll i=n-1;i>s-1;--i)
-    {
-        if(a[i]==1&&b[i]==1){cout<<"YES";return;}
-    }
-    cout<<"NO";
-
+	if(res)cout<<"YES";
+	else cout<<"NO";	
 }
 void run_with_t()
 {
@@ -76,7 +88,7 @@ int main()
 
 
 
-    run_with_t();
-    //run_case();
+    //run_with_t();
+    run_case();
     return 0;
 }

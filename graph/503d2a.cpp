@@ -1,6 +1,14 @@
+//dfs normal
+//bruteforce
 //900
+
 #include<bits/stdc++.h>
+
+
 using namespace std;
+
+
+
 #define NDEBUG
 
 #define fi first
@@ -8,10 +16,10 @@ using namespace std;
 #define vt vector
 #define pb(x) push_back(x)
 #define ppb(x) pop_back(x)
-#define FOR1(i,a,b) for(ll i=a;i<b;++i)
-#define FOR2(i,a,b) for(ll i=a;i>b;--i)
-#define FOR3(i,a,b) for(ll i=a;i<=b;++i)
-#define FOR4(i,a,b) for(ll i=a;i>=b;--i)
+#define for1(i,a,b) for(ll i=a;i<b;++i)
+#define for2(i,a,b) for(ll i=a;i>b;--i)
+#define for3(i,a,b) for(ll i=a;i<=b;++i)
+#define for4(i,a,b) for(ll i=a;i>=b;--i)
 //note not declare var i and cal for1,2 at same time
 #define EACH(x, a) for (auto& x: a)
 #define jj "\n"
@@ -29,37 +37,40 @@ const float pi=3.1415926535897932384626433;
 typedef pair<ll,ll> PLL;
 typedef unsigned long long  ULL;
 
+
 #define all(a) a.begin(), a.end()
 #define rall(v) v.rbegin(),v.rend()
 #define sz(x) (int)(x).size()// ??
+
+
+ll a[1005];
+bool d[1005];
+ll n;
+ll dfs(ll x)
+{
+	if(d[x]==true)return x;
+	d[x]=true;
+	return dfs(a[x]);
+}
 void run_case()
 {
-    ll n,s;
-    cin>>n>>s;
-    ll a[n],b[n];
-    FOR1(i,0,n)cin>>a[i];
-    FOR1(i,0,n)cin>>b[i];
+	cin>>n;
+	memset(a,0,sizeof(a));
+	for3(i,1,n)
+		cin>>a[i];
 
-    if(a[0]==0){cout<<"NO";return;}
-
-    if(a[s-1]==1){cout<<"YES";return;}
-
-    if(b[s-1]==0){cout<<"NO";return;}
-    
-
-    for(ll i=n-1;i>s-1;--i)
-    {
-        if(a[i]==1&&b[i]==1){cout<<"YES";return;}
-    }
-    cout<<"NO";
-
+	for3(i,1,n)
+	{	
+		memset(d,false,sizeof(d));
+		cout<<dfs(i)<<" ";
+	}
 }
 void run_with_t()
 {
     int t;
     cin>>t;
     while(t--)
-  {
+ 	{
         run_case();
         cout<<jj;
     }
@@ -76,7 +87,7 @@ int main()
 
 
 
-    run_with_t();
-    //run_case();
+    //run_with_t();
+    run_case();
     return 0;
 }
