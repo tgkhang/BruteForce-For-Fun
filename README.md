@@ -1,2 +1,1 @@
-# codeforces
-my codeforce submission
+# Practice Solving problem and my codeforce submission

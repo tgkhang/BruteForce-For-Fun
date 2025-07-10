@@ -26,7 +26,7 @@ ll caculateDistance(vector<ll> &r)
 
     return t;
 }
-
+ 
 void bruteForce(ll i, vector<ll> &currentRoute)
 {
     if (i == n)

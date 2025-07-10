@@ -19,81 +19,65 @@ struct Point
     }
 };
 
-bool isValidEdge(vector<Point> &points, int i, int j)
+double computeAngle(const Point &a, const Point &b, const Point &c)
 {
-    Point pi = points[i];
-    Point pj = points[j];
-    int n = points.size();
-    int sign = 0; // To track which side all points should be on
-
-    for (int k = 0; k < n; ++k)
-    {
-        if (k == i || k == j)
-            continue;
-
-        Point pk = points[k];
-        long long cross = (long long)(pj.x - pi.x) * (pk.y - pi.y) - (long long)(pj.y - pi.y) * (pk.x - pi.x);
-
-        if (cross != 0)
-        { // Not collinear
-            if (sign == 0)
-            {
-                sign = (cross > 0) ? 1 : -1;
-            }
-            else if ((cross > 0 && sign < 0) || (cross < 0 && sign > 0))
-            {
-                return false; // Found a point on the opposite side
-            }
-        }
-    }
-    return true; // All other points are on the same side, no collinear points between pi and pj
+    // Calculate the angle between vectors ab and ac
+    double abx = b.x - a.x;
+    double aby = b.y - a.y;
+    double acx = c.x - a.x;
+    double acy = c.y - a.y;
+    double dot = abx * acx + aby * acy;
+    double det = abx * acy - aby * acx;
+    double angle = atan2(det, dot);
+    return angle;
 }
 
 vector<Point> computeConvexHull(vector<Point> &points)
 {
     int n = points.size();
     if (n < 3)
-        return points;
-
-    set<Point> hull;
-
-    for (int i = 0; i < n; ++i)
+        return {};
+    // Find the leftmost (and then bottommost) point
+    int left = 0;
+    for (int i = 1; i < n; ++i)
     {
-        for (int j = i + 1; j < n; ++j)
-        {
-            if (isValidEdge(points, i, j))
-            {
-                hull.insert(points[i]);
-                hull.insert(points[j]);
-            }
-        }
-    }
-    vector<Point> convexHull(hull.begin(), hull.end());
-
-    // ensure no 3 points are one the same line
-    for (int i = 0; i < convexHull.size(); ++i)
-    {
-        for (int j = i + 1; j < convexHull.size(); ++j)
-        {
-            for (int k = j + 1; k < convexHull.size(); ++k)
-            {
-                Point pi = convexHull[i];
-                Point pj = convexHull[j];
-                Point pk = convexHull[k];
-
-                long long cross = (long long)(pj.x - pi.x) * (pk.y - pi.y) - (long long)(pj.y - pi.y) * (pk.x - pi.x);
-                if (cross == 0)
-                {
-                    // If they are collinear, remove the middle point
-                    convexHull.erase(convexHull.begin() + j);
-                    --j; // Adjust index after erasure
-                    break;
-                }
-            }
-        }
+        if (points[i] < points[left])
+            left = i;
     }
 
-    return convexHull;
+    // Start from the leftmost point and find the convex hull
+    vector<bool> used(n, false);
+    vector<Point> hull;
+    int p = left;
+    do
+    {
+        hull.push_back(points[p]);
+        int next = -1;
+        double bestAngle = -10.0; // -pi
+        for (int i = 0; i < n; ++i)
+        {
+            if (i == p)
+                continue;
+            if (used[i] && hull.size() > 1)
+                continue;
+            if (next == -1)
+            {
+                next = i;
+                continue;
+            }
+            double angle = computeAngle(points[p], points[next], points[i]);
+            if (angle < 0)
+                angle += 2 * M_PI;
+            if (angle > bestAngle)
+            {
+                bestAngle = angle;
+                next = i;
+            }
+        }
+        p = next;
+        used[p] = true;
+    } while (p != left);
+    return hull;
 }
 
 int main()

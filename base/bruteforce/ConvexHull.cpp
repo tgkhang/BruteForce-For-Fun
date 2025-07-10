@@ -1,7 +1,4 @@
-/*
-Convex Hull using Brute Force Approach O(n^3)
-*/
-
+// 22127181
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -10,99 +7,122 @@ struct Point
 {
     int x, y;
     Point() {}
-    Point(int x, int y) : x(x), y(y) {}
+    Point(ll x, ll y) : x(x), y(y) {}
+
+    bool operator==(const Point &other) const
+    {
+        return x == other.x && y == other.y;
+    }
+    bool operator<(const Point &other) const
+    {
+        if (x != other.x)
+            return x < other.x;
+        else
+            return y < other.y;
+    }
 };
 
-// Function to find the cross product of vectors (p1-p0) and (p2-p0)
-// Returns positive if counter-clockwise, negative if clockwise, 0 if collinear
-ll crossProduct(Point p0, Point p1, Point p2)
+
+bool isValidEdge(vector<Point> &points, int i, int j)
 {
-    return (ll)(p1.x - p0.x) * (p2.y - p0.y) - (ll)(p1.y - p0.y) * (p2.x - p0.x);
+    Point a = points[i];
+    Point b = points[j];
+
+    int n = points.size();
+    int sign = 0;
+    for (int k = 0; k < n; ++k)
+    {
+        if (k == i || k == j)
+            continue;
+
+        Point t = points[k];
+
+        // p1(x,y) p2(x,y) p3(x,y)
+        // p1p2 (p2x-p1x , p2y-p1y)
+        // p1p3 (p3x-p1x , p3y-p1y)
+        // cross product of p1p2 and p1p3
+        // (p2x-p1x)*(p3y-p1y) - (p2y-p1y)*(p3x-p1x)
+
+        ll cross = (ll)(b.x - a.x) * (t.y - a.y) - (b.y - a.y) * (t.x - a.x);
+
+        if (cross != 0)
+        {
+            if (sign == 0)
+            {
+                sign = (cross > 0) ? 1 : -1;
+            }
+            else if ((cross > 0 && sign < 0) || (cross < 0 && sign > 0))
+                return false;
+        }
+    }
+    return true;
 }
 
-// Brute force convex hull algorithm - O(n^3)
-vector<pair<Point, Point>> bruteForceConvexHull(vector<Point> &points)
+vector<Point> computeConvexHull(vector<Point> &points)
 {
     int n = points.size();
-    vector<pair<Point, Point>> convexHullEdges;
+    if (n < 3)
+        return points;
 
-    // For each pair of points (pi, pj)
-    for (int i = 0; i < n - 1; i++)
-    {
-        for (int j = i + 1; j < n; j++)
+    set<Point> hull;
+
+    for (ll i = 0; i < n; ++i)
+        for (ll j = i + 1; j < n; ++j)
         {
-            Point pi = points[i];
-            Point pj = points[j];
-
-            bool validEdge = true;
-            int sign = 0; // To track which side all points should be on
-
-            // Check all other points to see if they lie on the same side
-            for (int k = 0; k < n; k++)
+            if (isValidEdge(points, i, j))
             {
-                if (k == i || k == j)
-                    continue;
-
-                Point pk = points[k];
-                ll cross = crossProduct(pi, pj, pk);
-
-                if (cross != 0)
-                { // Not collinear
-                    if (sign == 0)
-                    {
-                        sign = (cross > 0) ? 1 : -1;
-                    }
-                    else if ((cross > 0 && sign < 0) || (cross < 0 && sign > 0))
-                    {
-                        validEdge = false;
-                        break;
-                    }
-                }
+                hull.insert(points[i]);
+                hull.insert(points[j]);
             }
+        }
 
-            // If all points lie on the same side, this edge is part of convex hull
-            if (validEdge)
+    vector<Point> convexHull(hull.begin(), hull.end());
+
+    // ensure no 3 points are on the same inline
+    for (ll i = 0; i < convexHull.size(); ++i)
+    {
+        for (ll j = i + 1; j < convexHull.size(); ++j)
+        {
+            for (ll k = j + 1; k < convexHull.size(); ++k)
             {
-                convexHullEdges.push_back({pi, pj});
+                Point a = convexHull[i];
+                Point b = convexHull[j];
+                Point c = convexHull[k];
+
+                ll cross = (ll)(b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+                if (cross == 0)
+                {
+                    convexHull.erase(convexHull.begin() + j);
+                    --j;
+                    break;
+                }
             }
         }
     }
-
-    return convexHullEdges;
-}
-
-// Function to print the convex hull edges
-void printConvexHull(const vector<pair<Point, Point>> &edges)
-{
-    cout << "Convex Hull Edges:" << endl;
-    for (const auto &edge : edges)
-    {
-        cout << "(" << edge.first.x << ", " << edge.first.y << ") -> ";
-        cout << "(" << edge.second.x << ", " << edge.second.y << ")" << endl;
-    }
+    return convexHull;
 }
 
 int main()
 {
     int n;
-    cout << "Enter number of points: ";
     cin >> n;
 
     vector<Point> points(n);
-    cout << "Enter " << n << " points (x y):" << endl;
-
-    for (int i = 0; i < n; i++)
-    {
+    for (ll i = 0; i < n; ++i)
         cin >> points[i].x >> points[i].y;
+
+    vector<Point> convexHull = computeConvexHull(points);
+
+    if (convexHull.empty())
+    {
+        cout << "No solution";
     }
+    else
+    {
+        sort(convexHull.begin(), convexHull.end());
 
-    // Find convex hull using brute force approach
-    vector<pair<Point, Point>> convexHullEdges = bruteForceConvexHull(points);
-
-    // Print the result
-    printConvexHull(convexHullEdges);
-
-    cout << "\nTotal edges in convex hull: " << convexHullEdges.size() << endl;
-
+        for (auto i : convexHull)
+            cout << i.x << " " << i.y << endl;
+    }
     return 0;
 }
