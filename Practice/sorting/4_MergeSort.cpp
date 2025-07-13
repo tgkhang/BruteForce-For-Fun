@@ -21,22 +21,22 @@ void merge(vector<int> &a, int l, int mid, int r)
     // main
     while ((i < n1) && (j < n2))
     {
-        if (t1[i] < t2[j])
+        if (t1[i] < t2[j]) //Basic operation 1
         {
-            a[k++] = t1[i++];
+            a[k++] = t1[i++]; //Basic operation 2
         }
         else
         {
-            a[k++] = t2[j++];
+            a[k++] = t2[j++]; //Basic operation 2
         }
     }
     // remian
 
     while (i < n1)
-        a[k++] = t1[i++];
+        a[k++] = t1[i++]; // Basic operation 2
 
     while (j < n2)
-        a[k++] = t2[j++];
+        a[k++] = t2[j++];  // Basic operation 2
 }
 
 void mergeSort(vector<int> &a, int l, int r)
