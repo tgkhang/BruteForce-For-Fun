@@ -3,3 +3,7 @@
 *.obj
 *.o
 *.dll
+
+tempCodeRunnerFile.cpp
+input.inp
+output.out
