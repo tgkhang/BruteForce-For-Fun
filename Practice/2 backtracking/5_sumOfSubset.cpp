@@ -22,20 +22,18 @@ void sumOfSubset1(int i, int sum, int S, vector<int> &a, vector<int> &result)
     }
     else
     {
-        if (sum + a[i] <= t && sum + S >= t)
+        if (sum + S >= t)
         {
-            result[i] = 1;
-            sumOfSubset1(i + 1, sum + a[i], S - a[i], a, result);
-            result[i] = 0;
+            if (sum + a[i] <= t)
+            {
+                result[i] = 1;
+                sumOfSubset1(i + 1, sum + a[i], S - a[i], a, result);
+                result[i] = 0;
+            }
             sumOfSubset1(i + 1, sum, S - a[i], a, result);
         }
     }
 }
-
-
-
-
-
 
 int main()
 {

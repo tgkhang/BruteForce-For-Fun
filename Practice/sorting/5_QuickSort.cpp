@@ -1,6 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Partition(a, left, right)
+// {
+//     p = a[left];
+//     i = left + 1;
+//     j = right;
+//     while (i <= j)
+//     {
+//         while (i <= j && a[i] < p)
+//             i++; // Bounds check: i <= j
+//         while (i <= j && a[j] > p)
+//             j--; // Bounds check: i <= j
+//         if (i <= j)
+//         {
+//             swap(a[i], a[j]);
+//             i++;
+//             j--;
+//         }
+//     }
+//     swap(a[left], a[j]); // Pivot to final position
+//     return j;
+// }
+
 int partition(vector<int> &a, int l, int r)
 {
     int pivot = a[r];

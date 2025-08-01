@@ -9,26 +9,28 @@ int cols[] = {1, -1, 0, 0};
 
 bool findPath(int x, int y, int n, int m)
 {
-    if(x>=0 && x<n && y>=0 && y<m)
+    if (x >= 0 && x < n && y >= 0 && y < m)
     {
-        if(result[x][y]== 'G') return true;
-        if(result[x][y]== '#') return false;
-        if(result[x][y]== 'x') return false;
-        
-        result[x][y]= 'x';
+        if (result[x][y] == 'G')
+            return true;
+        if (result[x][y] == '#')
+            return false;
+        if (result[x][y] == 'x')
+            return false;
 
-        for(int i=0; i<4; i++)
+        result[x][y] = 'x';
+
+        for (int i = 0; i < 4; i++)
         {
             int x1 = x + rows[i];
             int y1 = y + cols[i];
-            if(findPath(x1, y1, n, m))
+            if (findPath(x1, y1, n, m))
                 return true;
         }
 
         result[x][y] = '.'; // backtrack
         return false;
     }
-    else 
 
     return false;
 }
