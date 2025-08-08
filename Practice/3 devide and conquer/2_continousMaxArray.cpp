@@ -1,3 +1,12 @@
+/*
+Problem: Find the maximum sum of a contiguous subarray using divide and conquer.
+input
+8
+-2 -3 4 -1 -2 1 5 -3
+output:
+4 -1 -2 1 5
+7
+*/
 #include <iostream>
 #include <vector>
 #include <tuple>
