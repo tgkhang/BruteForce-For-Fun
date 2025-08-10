@@ -35,17 +35,52 @@ typedef unsigned long long ULL;
 
 void run_case()
 {
-    ll n;
-    cin >> n;
-    vector<ll> a(n);
-    ll tmp = 0, vt = -1;
+    ll n,k;
+    cin >> n>>k;
+    vector<ll> s(n),t(n);
 
-    vector<ll> res(n);
+    for(int i=0;i<n;++i)cin>>s[i];
+    for(int i=0;i<n;++i)cin>>t[i];
 
-    FOR1(i, 0, n)
-    {
-        cin >> a[i];
+    if(k==0){
+        sort(s.begin(),s.end());
+        sort(t.begin(),t.end());
+        if(s==t) 
+        {
+            cout<<"YES";
+            
+        }
+        else cout<<"NO";
+        return;
     }
+
+    unordered_map<ll,int>cnt;
+    cnt.reserve(n*2);
+    for(auto &x: s)
+    {
+        ll r= x%k;
+        if(r<0)r+=k;
+
+        ll nr = min(r,k-r);
+        cnt[nr]++;
+    }
+
+    for(auto &x: t)
+    {
+        ll r= x%k;
+        if(r<0)r+=k;
+
+        ll nr = min(r,k-r);
+        cnt[nr]--;
+    }
+    for(auto &i:cnt)if(i.second !=0) {
+        cout<<"NO";
+        return ;
+    }
+
+    cout<<"YES";
+   
+
 }
 void run_with_t()
 {
