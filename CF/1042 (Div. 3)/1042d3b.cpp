@@ -33,48 +33,69 @@ typedef unsigned long long ULL;
 #define rall(v) v.rbegin(), v.rend()
 #define sz(x) (int)(x).size() // ??
 
+// n odd -1,3, -1,3,... -1
+// n even -1,3,-1, ...,-1,2
+
 void run_case()
 {
+    int n;
+    cin >> n;
+    vt<ll> a(n, 3);
+
+    for (int i = 0; i < n; i += 2)
+        a[i] = -1;
+
+    if (n % 2 == 0)
+        a.back() = 2;
+
+    for (auto i : a)
+        cout << i << " ";
+}
+
+void run_case1()
+{
+
     ll n;
     cin >> n;
-    if (n == 1) {
-        cout << 1 ;
+    if (n == 1)
+    {
+        cout << 1;
         return;
     }
 
-    vector<ll>res(n);
+    vector<ll> res(n);
 
-    
-    if(n%2==0)
+    if (n % 2 == 0)
     {
-        for(auto i=0;i<n;i+=2)
+        for (auto i = 0; i < n; i += 2)
         {
-           res[i]=-1;
+            res[i] = -1;
         }
-        int tmp=2;
-        for(int i=n-1;i>=0;i-=2)
+        int tmp = 2;
+        for (int i = n - 1; i >= 0; i -= 2)
         {
-            res[i]=tmp;
-            if(tmp!=3)tmp++;
+            res[i] = tmp;
+            if (tmp != 3)
+                tmp++;
         }
-
     }
     else
     {
-        for(auto i=0;i<n;i+=2)
+        for (auto i = 0; i < n; i += 2)
         {
-           res[i]=-1;
+            res[i] = -1;
         }
-        int tmp=2;
-        for(int i=n-2;i>=0;i-=2)
+        int tmp = 2;
+        for (int i = n - 2; i >= 0; i -= 2)
         {
-            res[i]=tmp;
-            if(tmp!=3)tmp++;
+            res[i] = tmp;
+            if (tmp != 3)
+                tmp++;
         }
-        res[n-2]++;
+        res[n - 2]++;
     }
-    for(auto i: res)cout<<i<<" ";
-
+    for (auto i : res)
+        cout << i << " ";
 }
 void run_with_t()
 {

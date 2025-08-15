@@ -35,46 +35,45 @@ typedef unsigned long long ULL;
 
 void run_case()
 {
-
-    ll n, k;
-    cin >> n >> k;
-    vector<ll> a(n);
-    vector<ll> b(n);
-
-    FOR1(i, 0, n)
+    int n;
+    cin >> n;
+    vector<vector<int>> adj(n);
+    for (int i = 1; i < n; ++i) /// a tree n-1 edge
     {
-        cin >> a[i];
-    }
-    FOR1(i, 0, n)
-    {
-        cin >> b[i];
+        int u, v;
+        cin >> u >> v;
+        --u, --v; // init again start from 0
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
 
-    map<ll, ll> cnta, cntb;
-
-    for (auto &x : a)
+    if (n == 2)
     {
-        ll y = x % k;
-        y = min(y, k - y);
-        ++cnta[y];
+        cout << 0 << "\n";
+        return;
     }
 
-    for (auto &x : b)
+    int cnt = 0; // number of vertex has degree 1
+    for (int i = 0; i < n; ++i)
     {
-        ll y = x % k;
-        y = min(y, k - y);
-        ++cntb[y];
+        cnt += adj[i].size() == 1;
     }
 
-    for (auto &[x, y] : cnta)
+    int ans = cnt - 1;
+
+    // vertex i is the center of the star graph
+    for (int i = 0; i < n; ++i)
     {
-        if (y != cntb[x])
+        int t = 0;
+        for (auto &j : adj[i])
         {
-            cout << "NO\n";
-            return;
+            t += adj[j].size() == 1;
         }
+        // minus the number of leaf nodes connected to the center
+        // a operation will handle all node in that branch
+        ans = min(ans, cnt - t);
     }
-    cout << "YES\n";
+    cout << ans << "\n";
 }
 void run_with_t()
 {

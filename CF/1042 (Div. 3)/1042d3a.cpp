@@ -33,13 +33,63 @@ typedef unsigned long long ULL;
 #define rall(v) v.rbegin(), v.rend()
 #define sz(x) (int)(x).size() // ??
 
+// void run_case1()
+// {
+//     ll n;
+//     cin >> n;
+//     vector<ll> a(n);
+//     vector<ll> b(n);
+
+//     FOR1(i, 0, n)
+//     {
+//         cin >> a[i];
+//     }
+//     FOR1(i, 0, n)
+//     {
+//         cin >> b[i];
+//     }
+
+//     int res = 0;
+//     bool stop = false;
+
+//     while (!stop)
+//     {
+//         res++;
+//         bool check = false;
+//         FOR1(i, 0, n)
+//         {
+//             if (a[i] > b[i])
+//             {
+//                 check = true;
+//                 a[i]--;
+//                 break;
+//             }
+//         }
+
+//         FOR1(i, 0, n)
+//         {
+//             if (a[i] < b[i])
+//             {
+//                 a[i]++;
+//                 break;
+//             }
+//         }
+
+//         if (!check)
+//             stop = true;
+//     }
+
+//     cout << res;
+// }
+
 void run_case()
 {
+
     ll n;
     cin >> n;
     vector<ll> a(n);
     vector<ll> b(n);
-    
+
     FOR1(i, 0, n)
     {
         cin >> a[i];
@@ -49,38 +99,15 @@ void run_case()
         cin >> b[i];
     }
 
-    int res=0;
-    bool stop = false;
-    
-    while(!stop)
+    ll res = 0;
+
+    // NOTE that step 1 will not be affect by step 2 so we change
+
+    for (int i = 0; i < n; ++i)
     {
-        res++;
-        bool check = false;
-        FOR1(i,0,n)
-        {
-            if(a[i]>b[i])
-            {
-                check = true;
-                a[i] --;
-                break;
-            }
-
-        }
-
-         FOR1(i,0,n)
-                {
-                    if( a[i]<b[i])
-                    {
-                        a[i]++;
-                        break;
-                    }
-                }
-
-        if(!check) stop= true;
-   
+        res = res + max(0LL, a[i] - b[i]);
     }
-
-    cout<<res;
+    cout << res + 1;
 }
 void run_with_t()
 {
