@@ -56,7 +56,7 @@ void bruteForce2(ll i, ll left, ll coinNum)
         curSol[i] = j;
 
         // estimate the remaining amount
-        ll remaining = coinNum + j + (left - j * a[i]) / a[min(i + 1, k - 1)];
+        ll remaining = coinNum + j + (left - j * a[i]) / a[k - 1];
         if (remaining >= curSum)
             continue; // skip if we already have a better solution
 
@@ -74,7 +74,7 @@ void dynamicPrograming()
         for (ll coin : a)
         {
             // i< coin means we cannot use this coin
-            if (coin >= i && dp[i - coin] != LLONG_MAX)
+            if (coin <= i && dp[i - coin] != LLONG_MAX)
             {
                 dp[i] = min(dp[i], dp[i - coin] + 1);
             }

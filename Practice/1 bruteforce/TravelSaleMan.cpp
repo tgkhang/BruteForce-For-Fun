@@ -1,3 +1,8 @@
+/*
+This is a brute force solution to the Traveling Salesman Problem (TSP).
+using 2d array to store the distances between cities dis[i][j]
+using brute force to generate all routes
+*/
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -26,7 +31,7 @@ ll caculateDistance(vector<ll> &r)
 
     return t;
 }
- 
+
 void bruteForce(ll i, vector<ll> &currentRoute)
 {
     if (i == n)

@@ -1,0 +1,13 @@
+
+https://leetcode.com/problems/number-of-zero-filled-subarrays/
+A single zero contributes 1 subarray ([0]).
+
+Two consecutive zeros contribute 3 subarrays ([0], [0], [0,0]).
+
+Three consecutive zeros contribute 6 subarrays ([0], [0], [0], [0,0], [0,0], [0,0,0]).
+
+👉 In general, for a block of length k consisting only of zeros, the total number of zero-filled subarrays is:k⋅(k+1)/2
+tong tu 1 -> k (kẹp for count++ cộng vào sum cũng đucợ
+
+
+1227

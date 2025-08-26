@@ -1,4 +1,7 @@
-// 22127181
+/*
+    This is a brute force solution to the Convex Hull problem.
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -21,7 +24,6 @@ struct Point
             return y < other.y;
     }
 };
-
 
 bool isValidEdge(vector<Point> &points, int i, int j)
 {
@@ -78,7 +80,7 @@ vector<Point> computeConvexHull(vector<Point> &points)
 
     vector<Point> convexHull(hull.begin(), hull.end());
 
-    // ensure no 3 points are on the same inline
+    // ensure no 3 points are on the same line
     for (ll i = 0; i < convexHull.size(); ++i)
     {
         for (ll j = i + 1; j < convexHull.size(); ++j)
