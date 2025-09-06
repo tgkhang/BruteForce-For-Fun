@@ -13,14 +13,14 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Longest Duplicate Substring
 - [ ] String to Integer (atoi)
 - [ ] Regular Expression Matching
-- [ ] Largest Number
+- Largest Number (179) ✅
 - [ ] Longest Valid Parentheses
 - [ ] Interleaving String
 - [ ] Decode Ways
 - [ ] Reverse Words in a String
 - [ ] Wildcard Matching
 - [ ] Valid Parenthesis String
-- [ ] Remove K Digits
+- Remove K Digits (402) ✅
 - [ ] Palindrome Partitioning II
 - [ ] Decode Ways II
 - [ ] Repeated String Match
@@ -35,10 +35,10 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Making File Names Unique
 - [ ] Decoded String at Index
 - [ ] Split Array With Same Average
-- [ ] Count The Repetitions
+- Count The Repetitions (466) ✅
 
 ## Array & Array Manipulation
-- [ ] Median of Two Sorted Arrays
+- Median of Two Sorted Arrays (4) ✅
 - 3Sum (15) ✅
 - Jump Game II (45)
 - [ ] Maximum Product Subarray
@@ -64,7 +64,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Maximum Non Negative Product in a Matrix
 - [ ] Frequency of the Most Frequent Element
 - [ ] Maximum Number of Visible Points
-- [ ] Closest Room
+- Closest Room (1845) ✅
 - [ ] Minimize the Difference Between Target and Chosen Elements
 
 ## Hash Table & Hashing
@@ -94,7 +94,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Wildcard Matching
 - [ ] Valid Parenthesis String
 - [ ] Dungeon Game
-- [ ] Count The Repetitions
+- Count The Repetitions (466) ✅
 - [ ] Palindrome Partitioning II
 - [ ] Decode Ways II
 - [ ] Maximum Score from Performing Multiplication Operations
@@ -108,7 +108,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ## Two Pointers Technique
 - [ ] Compare Version Numbers
-- [ ] 3Sum
+- 3Sum (15) ✅
 - [ ] Next Permutation
 - [ ] Reverse Words in a String
 - [ ] One Edit Distance
@@ -117,36 +117,36 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Sum of Square Numbers
 
 ## Binary Search
-- [ ] Median of Two Sorted Arrays
+- Median of Two Sorted Arrays (4) ✅
 - [ ] 132 Pattern
 - [ ] Search in Rotated Sorted Array II
-- [ ] Nth Digit
+- Nth Digit (400) ✅
 - [ ] Shortest Subarray with Sum at Least K
 - [ ] Reverse Pairs
-- [ ] Closest Room
+- Closest Room (1845) ✅
 - [ ] Nth Highest Salary
 - [ ] Super Egg Drop
 - [ ] Minimum Space Wasted From Packaging
 - [ ] Frequency of the Most Frequent Element
 - [ ] Longest Duplicate Substring
 - [ ] Longest Common Subpath
-- [ ] Pow(x, n)
+- Pow(x, n) (50) ✅
 
 ## Sorting & Order
-- [ ] 3Sum
+- 3Sum (15) ✅
 - [ ] Wiggle Sort II
 - [ ] Maximum Number of Events That Can Be Attended
 - [ ] Reverse Pairs
-- [ ] Remove K Digits
+- Remove K Digits (402) ✅
 - [ ] Invalid Transactions
 - [ ] Frequency of the Most Frequent Element
-- [ ] Closest Room
+- Closest Room (1845) ✅
 
 ## Stack & Monotonic Stack
 - [ ] 132 Pattern
 - [ ] Longest Valid Parentheses
 - [ ] Valid Parenthesis String
-- [ ] Remove K Digits
+- Remove K Digits (402) ✅
 - [ ] Create Maximum Number
 - [ ] Shortest Unsorted Continuous Subarray
 - [ ] Decoded String at Index
@@ -169,10 +169,10 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ## Greedy Algorithms
 - [ ] Maximum Product Subarray
-- [ ] Largest Number
+- Largest Number (179) ✅
 - [ ] Strong Password Checker
 - [ ] Valid Parenthesis String
-- [ ] Remove K Digits
+- Remove K Digits (402) ✅
 - [ ] Maximum Number of Events That Can Be Attended
 - [ ] Split Array With Same Average
 - [ ] Create Maximum Number
@@ -183,11 +183,11 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Integer to English Words
 - [ ] Find the Closest Palindrome
 - [ ] Prime Palindrome
-- [ ] Pow(x, n)
+- Pow(x, n) (50) ✅
 - [ ] Fraction to Recurring Decimal
 - [ ] Next Greater Element III
 - [ ] Sum of Square Numbers
-- [ ] Nth Digit
+- Nth Digit (400) ✅
 - [ ] Self Crossing
 - [ ] Maximum Number of Visible Points
 - [ ] Make Sum Divisible by P
@@ -211,6 +211,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Divide Two Integers
 - [ ] Split Array With Same Average
 - [ ] Integer Replacement
+- Binary Gap (868) ✅
 
 ## Design / System Design
 - [ ] All O`one Data Structure
@@ -230,7 +231,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Longest Common Subpath
 
 ### Divide and Conquer
-- [ ] Median of Two Sorted Arrays
+- Median of Two Sorted Arrays (4) ✅
 - [ ] Reverse Pairs
 - [ ] Wiggle Sort II
 
