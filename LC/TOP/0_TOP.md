@@ -7,8 +7,8 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 ## String & String Algorithms
 - Longest Palindromic Substring(5) ✅
 - Integer to English Words (273) ✅
-- Compare Version Numbers
-- Longest Substring Without Repeating Characters
+- [ ] Compare Version Numbers
+- Longest Substring Without Repeating Characters (3) ✅
 - [ ] Find the Closest Palindrome
 - [ ] Longest Duplicate Substring
 - [ ] String to Integer (atoi)
@@ -17,7 +17,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Longest Valid Parentheses
 - [ ] Interleaving String
 - [ ] Decode Ways
-- [ ] Reverse Words in a String
+- Reverse Words in a String (151) ✅
 - [ ] Wildcard Matching
 - [ ] Valid Parenthesis String
 - Remove K Digits (402) ✅
@@ -68,9 +68,9 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Minimize the Difference Between Target and Chosen Elements
 
 ## Hash Table & Hashing
-- [ ] Word Ladder
+- Word Ladder (127) ✅
 - [ ] Word Ladder II
-- [ ] Longest Substring Without Repeating Characters
+- Longest Substring Without Repeating Characters (3) ✅
 - [ ] Fraction to Recurring Decimal
 - [ ] Making File Names Unique
 - [ ] Substring with Concatenation of All Words
@@ -110,7 +110,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Compare Version Numbers
 - 3Sum (15) ✅
 - [ ] Next Permutation
-- [ ] Reverse Words in a String
+- Reverse Words in a String (151) ✅
 - [ ] One Edit Distance
 - [ ] Shortest Unsorted Continuous Subarray
 - [ ] Ways to Split Array Into Three Subarrays
@@ -152,7 +152,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Decoded String at Index
 
 ## Sliding Window
-- [ ] Longest Substring Without Repeating Characters
+- Longest Substring Without Repeating Characters (3) ✅
 - [ ] Substring with Concatenation of All Words
 - [ ] Contains Duplicate III
 - [ ] Longest Duplicate Substring
