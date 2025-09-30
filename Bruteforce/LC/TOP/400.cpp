@@ -27,13 +27,12 @@ int findNthDigit(int n)
         numOfNum *= 10;
     }
 
-    int pos = (n - 1) / digit; // n minus first number
+    int pos = (n - 1) / digit; // n minus first number/ digit
     int remainder = (n - 1) % digit;
-    int start = (digit == 1) ? 1 : pow(10, digit - 1);// startnumber
+    int start = (digit == 1) ? 1 : pow(10, digit - 1); // startnumber
 
     string s = to_string(start + pos);
     return s[remainder] - '0';
-
 }
 
 int main()

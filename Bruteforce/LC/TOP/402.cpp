@@ -41,6 +41,7 @@ string removeKdigits(string num, int k)
     return res;
 }
 
+// faster version
 string removeKdigits1(string num, int k)
 {
     string result = "";
