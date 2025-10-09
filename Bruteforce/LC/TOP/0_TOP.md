@@ -135,7 +135,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ## Sorting & Order
 - 3Sum (15) ✅
-- [ ] Wiggle Sort II
+- Wiggle Sort II (324) ✅
 - [ ] Maximum Number of Events That Can Be Attended
 - [ ] Reverse Pairs
 - Remove K Digits (402) ✅
@@ -169,7 +169,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Water and Jug Problem
 
 ## Greedy Algorithms
-- [ ] Maximum Product Subarray
+- Maximum Product Subarray (152) ✅
 - Largest Number (179) ✅
 - [ ] Strong Password Checker
 - [ ] Valid Parenthesis String
