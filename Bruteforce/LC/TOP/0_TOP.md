@@ -244,3 +244,6 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Max Points on a Line
 - [ ] Self Crossing
 - [ ] Maximum Number of Visible Points
+
+### Algorithmic Techniques
+- Majority Element (169) ✅
