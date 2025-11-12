@@ -1,10 +1,11 @@
 # Top LeetCode Problems
 
-*Top problems that must be solved - recommended by someone in linkedin I don't remember 😢*
+_Top problems that must be solved - recommended by someone in linkedin I don't remember 😢_
 
 If I had to restart doing LeetCode practice and build my basics from 0 in 2025, I wouldn't solve the 3500+ problems available on LeetCode, but I would 100% solve these 90+ from my own notes.
 
 ## String & String Algorithms
+
 - Longest Palindromic Substring(5) ✅
 - Integer to English Words (273) ✅
 - [ ] Compare Version Numbers
@@ -38,6 +39,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - Count The Repetitions (466) ✅
 
 ## Array & Array Manipulation
+
 - Median of Two Sorted Arrays (4) ✅
 - 3Sum (15) ✅
 - Jump Game II (45)
@@ -68,6 +70,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Minimize the Difference Between Target and Chosen Elements
 
 ## Hash Table & Hashing
+
 - Word Ladder (127) ✅
 - [ ] Word Ladder II
 - Longest Substring Without Repeating Characters (3) ✅
@@ -83,6 +86,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Line Reflection
 
 ## Dynamic Programming (DP)
+
 - [ ] Longest Palindromic Substring
 - [ ] Jump Game II
 - [ ] Maximum Product Subarray
@@ -107,6 +111,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Number of Digit One
 
 ## Two Pointers Technique
+
 - Valid Triangle Number (611) ✅
 - [ ] Compare Version Numbers
 - 3Sum (15) ✅
@@ -118,6 +123,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Sum of Square Numbers
 
 ## Binary Search
+
 - Median of Two Sorted Arrays (4) ✅
 - [ ] 132 Pattern
 - [ ] Search in Rotated Sorted Array II
@@ -134,6 +140,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - Pow(x, n) (50) ✅
 
 ## Sorting & Order
+
 - 3Sum (15) ✅
 - Wiggle Sort II (324) ✅
 - [ ] Maximum Number of Events That Can Be Attended
@@ -144,6 +151,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - Closest Room (1845) ✅
 
 ## Stack & Monotonic Stack
+
 - [ ] 132 Pattern
 - [ ] Longest Valid Parentheses
 - [ ] Valid Parenthesis String
@@ -153,7 +161,9 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Decoded String at Index
 
 ## Sliding Window
+
 - Longest Substring Without Repeating Characters (3) ✅
+- Minimum Number of Operations to Make All Array Elements Equal to 1 (2654) ✅
 - [ ] Substring with Concatenation of All Words
 - [ ] Contains Duplicate III
 - [ ] Longest Duplicate Substring
@@ -161,6 +171,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Maximum Number of Visible Points
 
 ## Tree & Graph (including BFS/DFS/Topological Sort)
+
 - [ ] Alien Dictionary
 - [ ] Validate Binary Search Tree
 - [ ] Redundant Connection II
@@ -169,9 +180,10 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Water and Jug Problem
 
 ## Greedy Algorithms
+
 - Maximum Product Subarray (152) ✅
 - Largest Number (179) ✅
-- [ ] Strong Password Checker
+- Strong Password Checker (420)
 - [ ] Valid Parenthesis String
 - Remove K Digits (402) ✅
 - [ ] Maximum Number of Events That Can Be Attended
@@ -181,6 +193,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Sell Diminishing-Valued Colored Balls
 
 ## Math & Number Theory
+
 - [ ] Integer to English Words
 - [ ] Find the Closest Palindrome
 - [ ] Prime Palindrome
@@ -196,54 +209,64 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Sell Diminishing-Valued Colored Balls
 
 ## Heap / Priority Queue
+
 - [ ] Maximum Number of Events That Can Be Attended
 - [ ] Sell Diminishing-Valued Colored Balls
 - [ ] Design Twitter
 - [ ] Strong Password Checker
 
 ## Linked List
-- [ ] Rotate List
-- [ ] All O`one Data Structure
+
+- Rotate List (61) ✅
+- All O`one Data Structure (432)
 - [ ] Insert into a Sorted Circular Linked List
 - [ ] Design Linked List
 - [ ] Design Twitter
 
 ## Bit Manipulation / Bitmask
+
 - [ ] Divide Two Integers
 - [ ] Split Array With Same Average
 - [ ] Integer Replacement
 - Binary Gap (868) ✅
 
 ## Design / System Design
+
 - [ ] All O`one Data Structure
 - [ ] Design Twitter
 - [ ] Design Linked List
 - [ ] Kth Ancestor of a Tree Node
 
 ## Database / SQL
+
 - [ ] Nth Highest Salary
 - [ ] Word Frequency
 
 ## Advanced Patterns
 
 ### Rolling Hash / Suffix Array / Hash Function
+
 - [ ] Longest Duplicate Substring
 - [ ] Shortest Palindrome
 - [ ] Longest Common Subpath
 
 ### Divide and Conquer
+
 - Median of Two Sorted Arrays (4) ✅
 - [ ] Reverse Pairs
 - [ ] Wiggle Sort II
 
 ### Union Find
+
 - [ ] Surrounded Regions
 - [ ] Redundant Connection II
 
 ### Geometry
+
 - [ ] Max Points on a Line
 - [ ] Self Crossing
 - [ ] Maximum Number of Visible Points
 
 ### Algorithmic Techniques
+
 - Majority Element (169) ✅
