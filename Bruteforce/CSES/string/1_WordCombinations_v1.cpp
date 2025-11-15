@@ -6,6 +6,8 @@
     c
     cb
     output: 2
+
+    BRUTE FORCE VERSION
 */
 #include <iostream>
 using namespace std;

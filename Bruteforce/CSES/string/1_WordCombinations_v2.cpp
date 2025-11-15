@@ -1,4 +1,4 @@
-// Apply trie
+// Apply trie TO dynamic programing
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -23,18 +23,18 @@ public:
         root = new TrieNode();
     }
 
-    void insert(string &pattern)
+    void insert(string &s)
     {
-        TrieNode *current = root;
-        for (char ch : pattern)
+        TrieNode *cur = root;
+        for (char c : s)
         {
-            if (current->children.find(ch) == current->children.end())
+            if (cur->children.find(c) == cur->children.end())
             {
-                current->children[ch] = new TrieNode();
+                cur->children[c] = new TrieNode();
             }
-            current = current->children[ch];
+            cur = cur->children[c];
         }
-        current->isEndOfWord = true;
+        cur->isEndOfWord = true;
     }
 };
 
@@ -82,6 +82,5 @@ int main()
         }
     }
     cout << dp[n];
-
     return 0;
 }
