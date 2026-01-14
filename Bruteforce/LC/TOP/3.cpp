@@ -8,7 +8,8 @@ int lengthOfLongestSubstring(string s)
     int l = 0; // Left pointer of the sliding window
 
     for (int r = 0; r < s.length(); r++)
-    { // r is the right pointer of the sliding window
+    {
+        // r is the right pointer of the sliding window
         char currentChar = s[r];
 
         // If we have seen the character before, move the left pointer

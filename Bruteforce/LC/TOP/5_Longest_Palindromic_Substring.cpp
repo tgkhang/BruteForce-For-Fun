@@ -29,7 +29,6 @@ string longestPalindrome(string s)
 
     for (int i = 0; i < n; i++)
     {
-
         int len1 = expandAroundCenter(i, i); //case string has the middle character 
 
         int len2 = expandAroundCenter(i, i + 1); // case string not has the middle character

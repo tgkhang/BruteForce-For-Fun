@@ -1,4 +1,4 @@
-//caculate power include negative
+// caculate power include negative
 #include <iostream>
 using namespace std;
 
@@ -14,15 +14,12 @@ double myPow(double x, int n)
     double t = myPow(x, n / 2);
     if (n % 2 == 0)
     {
-
         return t * t;
     }
     else
     {
-
         if (n > 0)
         {
-
             return t * t * x;
         }
         else
@@ -34,6 +31,6 @@ double myPow(double x, int n)
 
 int main()
 {
-    cout<<fixed<<myPow(2,-2);
+    cout << fixed << myPow(2, -2);
     return 0;
 }

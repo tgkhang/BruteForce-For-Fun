@@ -109,6 +109,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Minimize the Difference Between Target and Chosen Elements
 - [ ] Maximum Non Negative Product in a Matrix
 - [ ] Number of Digit One
+- Increment Submatrices by One (2536) ✅
 
 ## Two Pointers Technique
 

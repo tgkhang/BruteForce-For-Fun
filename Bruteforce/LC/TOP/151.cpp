@@ -19,8 +19,7 @@ string reverseWords(string s)
         if (s[i] != ' ')
         {
             // space
-            if (finalIndex != 0)
-                s[finalIndex++] = ' ';
+            if (finalIndex != 0) s[finalIndex++] = ' ';
             int wordStart = finalIndex;
             int j = i;
 
@@ -29,7 +28,7 @@ string reverseWords(string s)
                 s[finalIndex++] = s[j++];
             }
 
-            //wordstart not word start -1 as wordstart start from 0 (s.begin()+0 fo ex)
+            // wordstart not word start -1 as wordstart start from 0 (s.begin()+0 fo ex)
             reverse(s.begin() + wordStart, s.begin() + finalIndex);
             // j is space;
             i = j;

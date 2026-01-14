@@ -13,10 +13,10 @@ vector<vector<int>> solve(vector<int> &a)
     vector<vector<int>> res;
     int n = a.size();
 
-    if (n < 3) return res;
+    if (n < 3)
+        return res;
 
     sort(a.begin(), a.end());
-
     for (size_t i = 0; i < n - 2; ++i)
     {
         if (i > 0 && a[i] == a[i - 1])
@@ -59,9 +59,7 @@ vector<vector<int>> solve(vector<int> &a)
 int main()
 {
     vector<int> a = {-1, 0, 1, 2, -1, -4};
-
     vector<vector<int>> res = solve(a);
-
     for (const auto &triplet : res)
     {
         cout << "[";

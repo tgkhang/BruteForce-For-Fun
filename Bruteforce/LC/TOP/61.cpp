@@ -1,7 +1,6 @@
 // Rotate List
 // Solution: Circular Linked List and return new head
 
-
 #include <iostream>
 using namespace std;
 
@@ -15,9 +14,8 @@ struct ListNode
 ListNode *rotateRight(ListNode *head, int k)
 {
     if (head == nullptr || head->next == nullptr)
-    {
         return head; // edge case
-    }
+
     int n = 1;
     ListNode *end = head;
     while (end->next != nullptr)

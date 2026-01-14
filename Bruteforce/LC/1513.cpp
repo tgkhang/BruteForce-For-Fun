@@ -40,3 +40,27 @@ int main()
     cout << numSub(s) << endl;
     return 0;
 }
+
+
+// sum 1+2+...+n = n(n+1)/2
+int numSub1(string s)
+{
+    const int MOD = 1e9 + 7;
+    long long res = 0;
+    int count = 0;
+
+    for (char c : s)
+    {
+        if (c == '1')
+        {
+            count++;
+            res = (res + count) % MOD;
+        }
+        else
+        {
+            count = 0;
+        }
+    }
+
+    return res;
+}

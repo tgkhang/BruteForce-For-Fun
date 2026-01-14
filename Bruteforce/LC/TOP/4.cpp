@@ -70,7 +70,6 @@ vector<int> merge(vector<int> &nums1, vector<int> &nums2)
 
 int main()
 {
-
     vector<int> a = {1, 2}, b = {3, 4};
     cout << findMedianSortedArrays(a, b);
     return 0;
