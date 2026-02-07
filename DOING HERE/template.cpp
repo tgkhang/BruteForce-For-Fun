@@ -67,10 +67,57 @@ void output_vector(const T &v,  int start = -1, int end = -1)
 #define rall(v) v.rbegin(), v.rend()
 #define sz(x) (int)(x).size() // ??
 
+void printRes(vector<int> &t)
+{
+    for (auto i : t)
+        cout << i << " ";
+}
+
 void run_case()
 {
-  
+    int n;
+    cin >> n;
+    vector<int> a(n);
+
+    vector<int> b(n);
+    FOR1(i, 0, n)
+    {
+        cin >> a[i];
+        b[i] = a[i];
+    }
+
+    sort(all(b), greater<int>());
+
+    int l = -1, r = -1, tmp = INT_MIN;
+    FOR1(i, 0, n)
+    {
+        if (a[i] != b[i])
+        {
+            l = i;
+            tmp = b[i];
+            break;
+        }
+    }
+
+    // find pos of r which is the position has = b[l] from the right
+    if (l == -1)
+    {
+        printRes(a);
+        return;
+    }
+    FOR2(i, n - 1, l - 1)
+    {
+        if (a[i] == tmp)
+        {
+            r = i;
+            break;
+        }
+    }
+
+    reverse(a.begin() + l, a.begin() + r + 1);
+    printRes(a);
 }
+
 void run_with_t()
 {
     int t;
