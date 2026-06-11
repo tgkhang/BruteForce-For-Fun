@@ -7,3 +7,6 @@ tempCodeRunnerFile.cpp
 input.inp
 output.out
 .exe
+
+.idea
+*.class
