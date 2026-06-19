@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    freopen("input.inp", "r", stdin);
+  freopen("input.inp", "r", stdin);
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
 

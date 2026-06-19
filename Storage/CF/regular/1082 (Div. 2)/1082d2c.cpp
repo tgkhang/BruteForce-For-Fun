@@ -1,5 +1,5 @@
 /*
-3 
+3
 best case: 1 1 2 2 3 3
 worst case: 1 2 3 2 3 1
 
@@ -40,7 +40,6 @@ void run_case() {
   for (int j = 1; j <= m - 1; j++)
     cout << " " << (j + 1) << " " << j;
   cout << " " << m;
-
 
   // Adjacent pairs for remaining n-m values
   for (int i = m + 1; i <= n; i++)
