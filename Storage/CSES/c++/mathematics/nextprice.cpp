@@ -2,53 +2,34 @@
 using namespace std;
 
 typedef long long ll;
+typedef unsigned long long ull;
 
-bool isPrime(ll x){
-    if(x<=1)return false;
-    if(x<=3)return true;
-    if(x%2==0 || x%3==0) return false;
-    for (ll i=5;i*i<=x; ++i)
-        {
-            
-        }
-}
-
-int main()
-{
-    return 0;
-}
+// limit 10^12
+// how to know how many prime in this area to build an array
+// use the prime number theorem to estimate the number of primes less than or equal to n, which is approximately n / log(n). For n = 10^12, this gives us an estimate of around 37,607,912 primes
+// to be safe, we can build an array of size 40 million to store all the primes up to 10^12.
+const ll BASE_LIMIT = 2000000;
 
 
-    // Check factors up to sqrt(n)
-    for (long long i = 5; i * i <= n; i += 6) {
-        if (n % i == 0 || n % (i + 2) == 0) {
-           return false;
-        }
-    }
-    return true;
-}
-
-// Function to find the next prime strictly greater than n
-long long nextPrime(long long n) {
+ll nextPrime(ll n){
     if (n < 2) return 2;
 
-    long long candidate = n + 1;
-    
-    // If the candidate is even, move to the next odd number
-    if (candidate % 2 == 0) {
-        candidate++;
-    }
 
-    // Test subsequent odd numbers
-    while (!isPrime(candidate)) {
-        candidate += 2;
-    }
-    
-    return candidate;
 }
 
-int main() {
-    long long n = 1000000000000LL; // 10^12
-    std::cout << "Next prime after " << n << " is " << nextPrime(n) << std::endl;
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    buildBasePrimes();
+
+    ll t;
+    cin >> t;
+    while(t--){
+        ll n;
+        cin >> n;
+        cout << nextPrime(n) << endl;
+    }
     return 0;
 }
