@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 typedef long long ll;
 
-long long countOnes(ll x) {
+long long countOnes(ll x) 
+{
     int c = 0;
     while (x > 0) {
         c += (x & 1);
@@ -14,10 +14,9 @@ long long countOnes(ll x) {
 }
 
 int main() {
-    ll n;
+    ll n, res = 0;
     cin >> n;
 
-    ll res = 0;
     for (int i = 1; i <= n; ++i) {
         res += countOnes(i);
     }

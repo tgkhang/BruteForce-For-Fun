@@ -2,8 +2,6 @@
 using namespace std;
 typedef long long ll;
 
-// Count per bit column instead of per number: O(log n).
-// For bit k over 0..n, the pattern is 2^k zeros then 2^k ones (period 2^(k+1)).
 int main()
 {
 	ll n;
@@ -19,3 +17,10 @@ int main()
 	}
 	cout << res;
 }
+
+
+// For example, with n = 7 the numbers 0..7 are 000 to 111:
+// - Bit 0 from 0-7: 01010101: 4 blocks of length 2 → 4 ones.
+// - Bit 1 from 0-7: 00110011: 2 blocks of length 4 → 4 ones.
+// - Bit 2 from 0-7: 00001111: 1 block of length 8 → 4 ones.
+// - Total: 12.m, 
