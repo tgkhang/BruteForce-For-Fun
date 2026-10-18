@@ -34,7 +34,7 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 const ll base = 1e9 + 7;
-const float pi = 3.1415926535897932384626433;
+const double pi = 3.1415926535897932384626433;
 typedef pair<ll, ll> PLL;
 typedef unsigned long long ULL;
 int d4i[] = {-1, 0, 1, 0};
