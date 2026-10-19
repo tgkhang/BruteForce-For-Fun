@@ -1,5 +1,4 @@
 // CF 4C - Registration system
-
 #include <bits/stdc++.h>
 using namespace std;
 #define NDEBUG
@@ -19,26 +18,17 @@ using namespace std;
 #define debug printf("I am here\n")
 #define space printf(" ")
 
-#define max3(a, b, c) max(a, b) > max(b, c) ? max(a, b) : max(b, c)
-#define min3(a, b, c) min(a, b) < min(b, c) ? min(a, b) : min(b, c)
-
 typedef long long ll;
 typedef long double ld;
 const ll base = 1e9 + 7;
 const double pi = 3.1415926535897932384626433;
 typedef pair<ll, ll> PLL;
 typedef unsigned long long ULL;
-int d4i[] = {-1, 0, 1, 0};
-int d4j[] = {0, 1, 0, -1};
-int d8i[] = {-1, -1, -1, 0, 1, 1, 1, 0};
-int d8j[] = {-1, 0, 1, 1, 1, 0, -1, -1};
 
 
 #define all(a) a.begin(), a.end()
 #define rall(v) v.rbegin(), v.rend()
 #define sz(x) (int)(x).size()  // ??
-
-
 class TrieNode {
     public:
     TrieNode* child[26];
@@ -67,7 +57,7 @@ void run_case() {
   if(node->cnt == 0){
       cout << "OK";
   }
-  else cout<<s<<node->cnt;
+  else cout << s << node->cnt;
   node->cnt++;
 }
 

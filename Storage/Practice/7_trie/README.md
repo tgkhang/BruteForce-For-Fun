@@ -10,8 +10,8 @@ Solve in order. File naming follows the rest of `Practice/` (e.g. `706d2d.cpp`, 
 
 | Done | Problem | Idea |
 | --- | --- | --- |
-| [ ] | [LC 208 - Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) | the template itself |
-| [ ] | [LC 14 - Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) | walk while node has 1 child |
+| [x] | [LC 208 - Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) | the template itself |
+| [x] | [LC 14 - Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) | is trie necessary for this problem? | 
 | [ ] | [LC 720 - Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/) | DFS only through end-of-word nodes |
 | [ ] | [LC 648 - Replace Words](https://leetcode.com/problems/replace-words/) | shortest prefix that is a word |
 | [ ] | [LC 677 - Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/) | store sum on each node |
