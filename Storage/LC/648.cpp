@@ -5,6 +5,8 @@ C3 (string_view + unordered_set): 144 ms | 37.2 MB
 
 C1 (Trie): 43 ms | 74.2 MB
 */
+#include <bits/stdc++.h>
+using namespace std;
 
 class Solution {
     struct Node {
@@ -44,9 +46,7 @@ class Solution {
    public:
     string replaceWords(vector<string>& dictionary, string sentence) {
         for (string& s : dictionary) insert(s);
-
         string res = "";
-
         istringstream iss(sentence);
         string word;
         bool first = true;
@@ -58,8 +58,6 @@ class Solution {
         return res;
     }
 };
-
-
 
 //c2
 class Solution {
@@ -101,7 +99,7 @@ class Solution {
         for (const auto& s : dictionary) roots.insert(s);
 
         string res;
-        string_view sv(sentence);  // Dùng view để duyệt không copy
+        string_view sv(sentence);
         size_t i = 0, n = sentence.length();
         bool first = true;
 
@@ -114,7 +112,7 @@ class Solution {
             bool replaced = false;
 
             for (size_t k = 0; k < word.length(); ++k) {
-                prefix = word.substr(0, k + 1);  // Lấy view O(1), không copy
+                prefix = word.substr(0, k + 1);  
                 if (roots.count(prefix)) {
                     if (!first) res += ' ';
                     first = false;
