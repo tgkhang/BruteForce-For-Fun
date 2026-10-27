@@ -15,7 +15,7 @@ Solve in order. File naming follows the rest of `Practice/` (e.g. `706d2d.cpp`, 
 | [x] | [LC 720 - Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/) | DFS only through end-of-word nodes |
 | [x] | [LC 648 - Replace Words](https://leetcode.com/problems/replace-words/) | shortest prefix that is a word |
 | [x] | [LC 677 - Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/) | store sum on each node |
-| [ ] | [LC 1268 - Search Suggestions System](https://leetcode.com/problems/search-suggestions-system/) | DFS lexicographic from prefix node |
+| [x] | [LC 1268 - Search Suggestions System](https://leetcode.com/problems/search-suggestions-system/) | DFS lexicographic from prefix node |
 | [ ] | [SPOJ PHONELST - Phone List](https://www.spoj.com/problems/PHONELST/) | is any number a prefix of another |
 | [x] | [CF 4C - Registration system](https://codeforces.com/problemset/problem/4/C) — [solution](cf-betaground4d2c.cpp) | count per end node (1300) |
 
@@ -23,7 +23,7 @@ Solve in order. File naming follows the rest of `Practice/` (e.g. `706d2d.cpp`, 
 
 | Done | Problem | Idea |
 | --- | --- | --- |
-| [ ] | [LC 211 - Design Add and Search Words](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | DFS on `.` wildcard |
+| [x] | [LC 211 - Design Add and Search Words](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | DFS on `.` wildcard |
 | [ ] | [LC 2416 - Sum of Prefix Scores of Strings](https://leetcode.com/problems/sum-of-prefix-scores-of-strings/) | `cnt` of words passing each node |
 | [ ] | [**CSES 1731 - Word Combinations**](https://cses.fi/problemset/task/1731) | `dp[i]` + walk trie from `i` — the classic |
 | [ ] | [LC 139 - Word Break](https://leetcode.com/problems/word-break/) | same as CSES 1731, boolean |

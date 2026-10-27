@@ -49,3 +49,38 @@ class Solution {
         return res;
     }
 };
+
+// thu hep l , r khi go them
+class Solution {
+   public:
+    vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
+        sort(products.begin(), products.end());
+        for (auto i : products) cout << i << " ";
+
+        vector<vector<string>> res;
+
+        int l = 0, r = products.size() - 1;
+
+        for (int i = 0; i < searchWord.length(); ++i) {
+            char c = searchWord[i];
+            // Tìm sản phẩm đầu tiên có ký tự thứ i >= c
+            while (l <= r &&
+                   (products[l].length() <= i || products[l][i] < c)) {
+                l++;
+            }
+            // Tìm sản phẩm cuối cùng có ký tự thứ i <= c
+            while (l <= r &&
+                   (products[r].length() <= i || products[r][i] > c)) {
+                r--;
+            }
+
+            vector<string> temp;
+            for (int k = l; k <= min(r, l + 2); ++k) {
+                temp.push_back(products[k]);
+            }
+            res.push_back(temp);
+        }
+
+        return res;
+    }
+};
