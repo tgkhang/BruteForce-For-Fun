@@ -24,7 +24,7 @@ Solve in order. File naming follows the rest of `Practice/` (e.g. `706d2d.cpp`, 
 | Done | Problem | Idea |
 | --- | --- | --- |
 | [x] | [LC 211 - Design Add and Search Words](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | DFS on `.` wildcard |
-| [ ] | [LC 2416 - Sum of Prefix Scores of Strings](https://leetcode.com/problems/sum-of-prefix-scores-of-strings/) | `cnt` of words passing each node |
+| [x] | [LC 2416 - Sum of Prefix Scores of Strings](https://leetcode.com/problems/sum-of-prefix-scores-of-strings/) | `cnt` of words passing each node |
 | [ ] | [**CSES 1731 - Word Combinations**](https://cses.fi/problemset/task/1731) | `dp[i]` + walk trie from `i` — the classic |
 | [ ] | [LC 139 - Word Break](https://leetcode.com/problems/word-break/) | same as CSES 1731, boolean |
 | [ ] | [LC 472 - Concatenated Words](https://leetcode.com/problems/concatenated-words/) | Word Break per word |
