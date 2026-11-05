@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sort Visualizer</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f4f2ec;
+    --panel: #fffdf8;
+    --ink: #24231f;
+    --muted: #68655c;
+    --line: #d9d5c9;
+    --bar: #8c95a3;
+    --compare: #c98500;
+    --swap: #cf3f2e;
+    --min: #2b6cb8;
+    --settled: #2f8a5b;
+    --settled-wash: rgba(47, 138, 91, .11);
+    --active-line: #fbeecb;
+    --active-edge: #c98500;
+    --kw: #7a3e9d;
+    --num: #b1561c;
+    --pre: #5f7a2a;
+    --note: #fbf1dc;
+    --error: #b42f20;
+    --dur: 300ms;
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, Menlo, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171817;
+      --panel: #212321;
+      --ink: #ecebe4;
+      --muted: #a5a399;
+      --line: #393b37;
+      --bar: #79828f;
+      --compare: #e7ab2c;
+      --swap: #f0664f;
+      --min: #6aa9ec;
+      --settled: #4fb985;
+      --settled-wash: rgba(79, 185, 133, .12);
+      --active-line: #443815;
+      --active-edge: #e7ab2c;
+      --kw: #c99ae6;
+      --num: #ee9f68;
+      --pre: #a9c76b;
+      --note: #33301f;
+      --error: #ff8b78;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.5 var(--sans);
+  }
+  main { max-width: 1200px; margin: 0 auto; padding: 24px 20px 32px; }
+  header { margin-bottom: 18px; }
+  h1 { margin: 0; font-size: 24px; line-height: 1.2; font-weight: 650; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  code { font-family: var(--mono); font-size: .93em; }
+
+  .tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .tabs button {
+    min-height: 38px;
+    margin-bottom: -1px;
+    padding: 0 14px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 6px 6px 0 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-selected="true"] { border-bottom-color: var(--compare); color: var(--ink); font-weight: 600; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 16px;
+    align-items: start;
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .panel-title {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font: 13px var(--mono);
+  }
+
+  /* Source panel */
+  .source { overflow-x: auto; padding: 8px 0; font: 13px/1.62 var(--mono); }
+  .source-line {
+    display: grid;
+    grid-template-columns: 38px max-content;
+    min-width: 100%;
+    border-left: 3px solid transparent;
+    white-space: pre;
+  }
+  .source-line .num { padding-right: 12px; text-align: right; color: var(--muted); user-select: none; }
+  .source-line.active { background: var(--active-line); border-left-color: var(--active-edge); }
+  .source-line.active .num { color: var(--ink); font-weight: 700; }
+  .tok-kw { color: var(--kw); }
+  .tok-num { color: var(--num); }
+  .tok-pre { color: var(--pre); }
+  .note {
+    margin: 0;
+    padding: 11px 14px;
+    background: var(--note);
+    border-top: 1px solid var(--line);
+    border-radius: 0 0 7px 7px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* Bars */
+  .stage { padding: 16px 16px 12px; }
+  .plot {
+    position: relative;
+    height: 260px;
+    border-bottom: 1px solid var(--muted);
+  }
+  .settled-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: var(--settled-wash);
+    transition: left var(--dur) ease, width var(--dur) ease;
+  }
+  .slot {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: calc(100% / var(--n));
+    transform: translateX(calc(var(--pos) * 100%));
+    transition: transform var(--dur) ease;
+  }
+  .bar { height: 100%; }
+  .fill {
+    position: absolute;
+    left: 13%;
+    right: 13%;
+    bottom: 0;
+    height: var(--h);
+    background: var(--bar);
+    border-radius: 3px 3px 0 0;
+    transition: background-color 120ms linear, height var(--dur) ease;
+  }
+  .value {
+    position: absolute;
+    left: -8px;
+    right: -8px;
+    bottom: calc(100% + 3px);
+    text-align: center;
+    font: 600 13px var(--mono);
+  }
+  .bar.is-settled .fill { background: var(--settled); }
+  .bar.is-min .fill { background: var(--min); }
+  .bar.is-compare .fill { background: var(--compare); }
+  .bar.is-swap .fill { background: var(--swap); }
+  .bar.is-stale .fill { background: transparent; border: 2px dashed var(--muted); }
+  .bar.is-stale .value { color: var(--muted); }
+
+  /* Insertion sort's key lives outside the array, so it gets its own column. */
+  .stage-row { display: flex; gap: 12px; }
+  .track { flex: 1; min-width: 0; }
+  .key-slot { flex: 0 0 64px; text-align: center; }
+  .key-plot {
+    position: relative;
+    height: 260px;
+    border-bottom: 1px solid var(--muted);
+    border-radius: 6px 6px 0 0;
+    background: var(--bg);
+  }
+  .key-plot .fill { background: var(--min); }
+  .key-slot.is-compare .fill { background: var(--compare); }
+  .key-label { margin-top: 4px; color: var(--min); font: 700 12px var(--mono); }
+
+  .ruler { position: relative; height: calc(26px + var(--rows, 1) * 24px); }
+  .ruler .index {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: calc(100% / var(--n));
+    transform: translateX(calc(var(--pos) * 100%));
+    text-align: center;
+    color: var(--muted);
+    font: 12px var(--mono);
+  }
+  .pointer {
+    position: absolute;
+    top: calc(24px + var(--row, 0) * 24px);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100% / var(--n));
+    transform: translateX(calc(var(--pos) * 100%));
+    transition: transform var(--dur) ease;
+    font: 700 12px var(--mono);
+    white-space: nowrap;
+  }
+  .pointer::before { content: "\25B2"; display: block; font-size: 8px; line-height: 1; }
+  .pointer[hidden] { display: none; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 11px; height: 11px; border-radius: 2px; background: var(--c); }
+
+  /* State readout */
+  .explain {
+    min-height: 70px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .explain .where { display: block; color: var(--muted); font: 12px var(--mono); }
+  .vars {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+  }
+  .var { padding: 9px 12px; border-left: 1px solid var(--line); min-width: 0; }
+  .var:first-child { border-left: 0; }
+  .var dt { color: var(--muted); font: 12px var(--mono); white-space: nowrap; }
+  .var dd { margin: 1px 0 0; font: 600 16px var(--mono); }
+  .var.changed dd { color: var(--swap); }
+  dl { margin: 0; }
+  .counts {
+    padding: 9px 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .counts b { color: var(--ink); font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* Controls */
+  .controls { margin-top: 16px; padding: 14px 16px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+  .row + .row { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+  button, select, input[type="text"] {
+    min-height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--ink);
+    font: 14px var(--sans);
+  }
+  button { padding: 0 12px; cursor: pointer; }
+  button:hover { border-color: var(--muted); }
+  button.primary { min-width: 76px; background: var(--ink); border-color: var(--ink); color: var(--panel); font-weight: 600; }
+  select { padding: 0 6px; }
+  input[type="text"] { flex: 1 1 220px; min-width: 0; padding: 0 10px; font-family: var(--mono); font-size: 13.5px; }
+  input[type="range"] { flex: 1 1 200px; min-width: 120px; accent-color: var(--compare); }
+  label { color: var(--muted); font-size: 13px; }
+  .inline-label { display: inline-flex; align-items: center; gap: 6px; }
+  #stepLabel { min-width: 104px; text-align: right; color: var(--muted); font: 12.5px var(--mono); }
+  #inputError { flex-basis: 100%; margin: 0; color: var(--error); font-size: 13px; }
+  #inputError:empty { display: none; }
+  .hint { margin-left: auto; color: var(--muted); font-size: 12.5px; }
+
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: minmax(0, 1fr); }
+    .stage-panel { order: -1; }
+    .plot, .key-plot { height: 200px; }
+    .vars { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .var:nth-child(4) { border-left: 0; }
+    .var:nth-child(n + 4) { border-top: 1px solid var(--line); }
+    .hint { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slot, .pointer, .settled-zone, .fill { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 id="heading"></h1>
+    <p>Each step runs one line of <code id="fnName"></code> from <code>bubble_selection_insertion.cpp</code>.</p>
+  </header>
+
+  <div class="tabs" id="tabs" role="tablist" aria-label="Algorithm"></div>
+
+  <div class="layout" id="algoPanel" role="tabpanel">
+    <section class="panel" aria-label="Source code">
+      <div class="panel-title" id="sourceTitle"></div>
+      <div class="source" id="source"></div>
+      <p class="note" id="note"></p>
+    </section>
+
+    <section class="panel stage-panel" aria-label="Algorithm state">
+      <div class="stage">
+        <div class="stage-row">
+          <div class="track">
+            <div class="plot" id="plot"><div class="settled-zone" id="settledZone"></div></div>
+            <div class="ruler" id="ruler"></div>
+          </div>
+          <div class="key-slot" id="keySlot" hidden>
+            <div class="key-plot">
+              <div class="fill" id="keyFill"><div class="value" id="keyValue"></div></div>
+            </div>
+            <div class="key-label">key</div>
+          </div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="explain">
+        <span class="where" id="where"></span>
+        <span id="text"></span>
+      </div>
+      <dl class="vars" id="vars"></dl>
+      <div class="counts">
+        Comparisons <b id="cComparisons">0</b> &nbsp;·&nbsp; <span id="opName">Swaps</span> <b id="cSwaps">0</b>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel controls" aria-label="Controls">
+    <div class="row">
+      <button class="primary" id="play" type="button">Play</button>
+      <button id="restart" type="button">Restart</button>
+      <button id="back" type="button">Back</button>
+      <button id="forward" type="button">Next</button>
+      <label class="inline-label">Speed
+        <select id="speed">
+          <option value="1400">0.5x</option>
+          <option value="700" selected>1x</option>
+          <option value="350">2x</option>
+          <option value="140">5x</option>
+        </select>
+      </label>
+      <input id="scrub" type="range" min="0" value="0" aria-label="Step">
+      <span id="stepLabel"></span>
+    </div>
+    <form class="row" id="arrayForm">
+      <label for="arrayInput">vector&lt;int&gt; a</label>
+      <input id="arrayInput" type="text" spellcheck="false" autocomplete="off" aria-describedby="inputError">
+      <button type="submit">Load</button>
+      <button type="button" data-preset="random">Random</button>
+      <button type="button" data-preset="sorted">Already sorted</button>
+      <button type="button" data-preset="reversed">Reversed</button>
+      <span class="hint">Space plays · ← → step</span>
+      <p id="inputError" role="alert"></p>
+    </form>
+  </section>
+</main>
+
+<script>
+// Shown verbatim from bubble_selection_insertion.cpp.
+const SOURCE = String.raw`#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void bubbleSort(vector<int>& a) {
+    int n = a.size();
+
+    for (int i = 0; i < n - 1; ++i) {
+        bool tmp = false;
+
+        for (int j = 0; j < n - 1 - i; ++j) {
+            if (a[j] > a[j + 1]) {
+                swap(a[j], a[j + 1]);
+                tmp = true;
+            }
+        }
+        if (!tmp) break;
+    }
+}
+
+void selectionSort(vector<int>& a) {
+    int n = a.size();
+
+    for (int i = 0; i < n - 1; ++i) {
+        int minId = i;
+        for (int j = i + 1; j < n; ++j)
+            if (a[j] < a[minId]) minId = j;
+
+        if (minId != i) swap(a[i], a[minId]);
+    }
+}
+
+void insertionSort(vector<int>& a) {
+    int n = a.size();
+
+    for (int i = 1; i < n; ++i) {
+        int key = a[i];
+        int j = i - 1;
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j];
+            --j;
+        }
+        a[j + 1] = key;
+    }
+}
+
+int main() {
+    return 0;
+}`;
+
+function plural(count, word) {
+  return `${count} ${word}${count === 1 ? "" : "s"}`;
+}
+
+// Each trace mirrors the C++ control flow; each snap() is one visit to a source line.
+function bubbleTrace(input) {
+  const a = input.map((value, id) => ({ value, id }));
+  const steps = [];
+  let n = null, i = null, j = null, flag = null;
+  let comparisons = 0, swaps = 0, settledFrom = a.length;
+
+  const snap = (line, kind, text) => {
+    const pair = j === null ? [] : [j, j + 1];
+    steps.push({
+      line, text, comparisons, swaps,
+      settled: [settledFrom, a.length],
+      order: a.map(item => item.id),
+      vars: [n, i, j, flag, j === null ? null : a[j].value, j === null ? null : a[j + 1].value],
+      pointers: [j, j === null ? null : j + 1],
+      marks: {
+        compare: kind === "compare" ? pair : [],
+        swap: kind === "swap" || kind === "set" ? pair : [],
+      },
+    });
+  };
+
+  snap(6, "call", `bubbleSort is called with a = {${input.join(", ")}}.`);
+  n = a.length;
+  snap(7, "init", `n = ${n}.`);
+
+  for (i = 0; ; ++i) {
+    const more = i < n - 1;
+    const prefix = i === 0 ? "Start with i = 0." : `++i makes i = ${i}.`;
+    if (!more) {
+      snap(9, "outer", `${prefix} ${i} < ${n - 1} is false, so the outer loop ends.`);
+      break;
+    }
+    snap(9, "outer", `${prefix} ${i} < ${n - 1} is true, so pass ${i + 1} begins.`);
+
+    flag = false;
+    snap(10, "flag", "tmp resets to false. No swap has happened in this pass yet.");
+
+    let bound = n - 1 - i;
+    for (j = 0; ; ++j) {
+      const prefixJ = j === 0 ? "Start with j = 0." : `++j makes j = ${j}.`;
+      if (!(j < bound)) {
+        settledFrom = bound;
+        const finished = a[bound].value;
+        const saved = j;
+        j = null;
+        snap(12, "inner", `${prefixJ} ${saved} < ${bound} is false, so the pass ends. ${finished} is now in its final position at index ${bound}.`);
+        break;
+      }
+      snap(12, "inner", `${prefixJ} ${j} < ${bound} is true, so the inner loop continues.`);
+
+      comparisons++;
+      const x = a[j].value, y = a[j + 1].value;
+      const outOfOrder = x > y;
+      snap(13, "compare", outOfOrder
+        ? `a[${j}] > a[${j + 1}]: ${x} > ${y} is true, so swap them.`
+        : `a[${j}] > a[${j + 1}]: ${x} > ${y} is false, so leave them in place.`);
+
+      if (outOfOrder) {
+        [a[j], a[j + 1]] = [a[j + 1], a[j]];
+        swaps++;
+        snap(14, "swap", `Swapped: a[${j}] = ${y}, a[${j + 1}] = ${x}.`);
+        flag = true;
+        snap(15, "set", "tmp becomes true. This pass has made a swap.");
+      }
+    }
+
+    if (!flag) {
+      settledFrom = 0;
+      snap(18, "exit", "!tmp is true: this pass made no swaps, so the array is sorted and the loop breaks early.");
+      break;
+    }
+    snap(18, "check", "!tmp is false: this pass made a swap, so the outer loop continues.");
+    flag = null;
+  }
+
+  settledFrom = 0;
+  i = null; j = null; flag = null;
+  snap(20, "done", `bubbleSort returns. a = {${a.map(item => item.value).join(", ")}}, using ${plural(comparisons, "comparison")} and ${plural(swaps, "swap")}.`);
+  return steps;
+}
+
+function selectionTrace(input) {
+  const a = input.map((value, id) => ({ value, id }));
+  const steps = [];
+  let n = null, i = null, j = null, minId = null;
+  let comparisons = 0, swaps = 0, settledTo = 0;
+  const valueAt = index => index === null ? null : a[index].value;
+
+  const snap = (line, text, marks = {}) => steps.push({
+    line, text, comparisons, swaps, marks,
+    settled: [0, settledTo],
+    order: a.map(item => item.id),
+    vars: [n, i, j, minId, valueAt(j), valueAt(minId)],
+    pointers: [i, j, minId],
+  });
+
+  snap(22, `selectionSort is called with a = {${input.join(", ")}}.`);
+  n = a.length;
+  snap(23, `n = ${n}.`);
+
+  for (i = 0; ; ++i) {
+    const prefix = i === 0 ? "Start with i = 0." : `++i makes i = ${i}.`;
+    if (!(i < n - 1)) {
+      settledTo = n;
+      snap(25, `${prefix} ${i} < ${n - 1} is false, so the outer loop ends. The one value left, ${a[i].value}, is already in place.`);
+      break;
+    }
+    snap(25, `${prefix} ${i} < ${n - 1} is true, so pass ${i + 1} begins.`);
+
+    minId = i;
+    snap(26, `minId = ${i}. Assume a[${i}] = ${a[i].value} is the smallest value in the unsorted part.`, { min: [minId] });
+
+    for (j = i + 1; ; ++j) {
+      const prefixJ = j === i + 1 ? `Start with j = ${j}.` : `++j makes j = ${j}.`;
+      if (!(j < n)) {
+        const saved = j;
+        j = null;
+        snap(27, `${prefixJ} ${saved} < ${n} is false, so the scan ends. The smallest value is ${a[minId].value}, at index ${minId}.`, { min: [minId] });
+        break;
+      }
+      snap(27, `${prefixJ} ${j} < ${n} is true, so the scan continues.`, { min: [minId] });
+
+      comparisons++;
+      const x = a[j].value, y = a[minId].value;
+      const smaller = x < y;
+      snap(28, smaller
+        ? `a[${j}] < a[${minId}]: ${x} < ${y} is true, so index ${j} holds the new minimum.`
+        : `a[${j}] < a[${minId}]: ${x} < ${y} is false, so minId stays ${minId}.`, { compare: [j], min: [minId] });
+
+      if (smaller) {
+        minId = j;
+        snap(28, `minId = ${j}. The smallest value so far is ${x}.`, { min: [minId] });
+      }
+    }
+
+    if (minId === i) {
+      settledTo = i + 1;
+      snap(30, `minId != i: ${minId} != ${i} is false, so no swap is needed. ${a[i].value} is in its final position at index ${i}.`);
+    } else {
+      snap(30, `minId != i: ${minId} != ${i} is true, so swap a[${i}] and a[${minId}].`, { min: [minId] });
+      [a[i], a[minId]] = [a[minId], a[i]];
+      swaps++;
+      settledTo = i + 1;
+      snap(30, `Swapped: a[${i}] = ${a[i].value}, a[${minId}] = ${a[minId].value}. ${a[i].value} is now in its final position at index ${i}.`, { swap: [i, minId] });
+    }
+    minId = null;
+  }
+
+  i = null; j = null; minId = null;
+  snap(32, `selectionSort returns. a = {${a.map(item => item.value).join(", ")}}, using ${plural(comparisons, "comparison")} and ${plural(swaps, "swap")}.`);
+  return steps;
+}
+
+// Bars never change places here: each slot draws whatever mem[slot] really holds,
+// so a shift shows up as a copy, with the same value briefly in two slots.
+function insertionTrace(input) {
+  const mem = [...input];
+  const slots = input.map((_, index) => index);
+  const steps = [];
+  let n = null, i = null, j = null, key = null;
+  let comparisons = 0, shifts = 0, sortedTo = 0;
+
+  const snap = (line, text, marks = {}) => steps.push({
+    line, text, comparisons, marks, key,
+    swaps: shifts,
+    settled: [0, sortedTo],
+    order: slots,
+    mem: [...mem],
+    vars: [
+      n, i, key, j,
+      j === null || j < 0 ? null : mem[j],
+      j === null ? null : mem[j + 1],
+    ],
+    pointers: [
+      i !== null && i < input.length ? i : null,
+      j === null || j < 0 ? null : j,
+      j === null ? null : j + 1,
+    ],
+  });
+
+  snap(34, `insertionSort is called with a = {${input.join(", ")}}.`);
+  n = mem.length;
+  snap(35, `n = ${n}.`);
+
+  sortedTo = 1;
+  for (i = 1; ; ++i) {
+    const prefix = i === 1 ? "Start with i = 1." : `++i makes i = ${i}.`;
+    if (!(i < n)) {
+      snap(37, `${prefix} ${i} < ${n} is false, so the outer loop ends.`);
+      break;
+    }
+    snap(37, `${prefix} ${i} < ${n} is true, so a[${i}] gets inserted into the sorted part on its left.`);
+
+    key = mem[i];
+    sortedTo = i + 1;
+    snap(38, `key = a[${i}] = ${key}. The value is saved outside the array, so a[${i}] is now free to overwrite.`, { stale: [i] });
+
+    j = i - 1;
+    snap(39, `j = ${j}, the last index of the sorted part.`, { stale: [i] });
+
+    while (true) {
+      if (j < 0) {
+        snap(40, `j >= 0: ${j} >= 0 is false, so the loop stops without reading a[j]. key belongs at the very front.`, { stale: [0] });
+        break;
+      }
+      comparisons++;
+      const value = mem[j];
+      if (!(value > key)) {
+        snap(40, `j >= 0 is true, but a[${j}] > key: ${value} > ${key} is false, so the loop stops.`, { compare: [j], stale: [j + 1] });
+        break;
+      }
+      snap(40, `j >= 0 is true and a[${j}] > key: ${value} > ${key} is true, so ${value} gets copied right.`, { compare: [j], stale: [j + 1] });
+
+      mem[j + 1] = mem[j];
+      shifts++;
+      snap(41, `a[${j + 1}] = a[${j}]: ${value} is copied into index ${j + 1}, not swapped. Index ${j} still holds an old ${value} and is now free to overwrite. key is untouched.`, { swap: [j + 1], stale: [j] });
+
+      --j;
+      snap(42, `--j makes j = ${j}.`, { stale: [j + 1] });
+    }
+
+    mem[j + 1] = key;
+    snap(44, j + 1 === i
+      ? `a[${j + 1}] = key: nothing needed to move, so ${key} is written back where it came from. Indexes 0 to ${i} are sorted.`
+      : `a[${j + 1}] = key: ${key} is copied from key into index ${j + 1}, overwriting the old copy. Indexes 0 to ${i} are sorted.`, { min: [j + 1] });
+    j = null;
+    key = null;
+  }
+
+  i = null;
+  snap(46, `insertionSort returns. a = {${mem.join(", ")}}, using ${plural(comparisons, "comparison")} and ${plural(shifts, "shift")}.`);
+  return steps;
+}
+
+const ALGOS = {
+  bubble: {
+    label: "Bubble sort",
+    fn: "bubbleSort",
+    lines: [6, 20],
+    trace: bubbleTrace,
+    vars: ["n", "i", "j", "tmp", "a[j]", "a[j+1]"],
+    pointers: [
+      { name: "j", color: "--compare", row: 0 },
+      { name: "j+1", color: "--compare", row: 0 },
+    ],
+    legend: [
+      ["--compare", "Comparing a[j], a[j+1]"],
+      ["--swap", "Swapping"],
+      ["--settled", "In final position"],
+    ],
+    note: `<strong>Early exit.</strong> Line 18 stops as soon as a pass makes no swaps. Try <em>Already sorted</em>: one pass and it's done.`,
+  },
+  selection: {
+    label: "Selection sort",
+    fn: "selectionSort",
+    lines: [22, 32],
+    trace: selectionTrace,
+    vars: ["n", "i", "j", "minId", "a[j]", "a[minId]"],
+    pointers: [
+      { name: "i", color: "--ink", row: 0 },
+      { name: "j", color: "--compare", row: 0 },
+      { name: "minId", color: "--min", row: 1 },
+    ],
+    legend: [
+      ["--compare", "Scanning a[j]"],
+      ["--min", "Smallest so far, a[minId]"],
+      ["--swap", "Swapping"],
+      ["--settled", "In final position"],
+    ],
+    note: `<strong>No early exit.</strong> It always scans the whole unsorted part, so <em>Already sorted</em> still takes n(n&minus;1)/2 comparisons, but it never makes more than n&minus;1 swaps.`,
+  },
+  insertion: {
+    label: "Insertion sort",
+    fn: "insertionSort",
+    lines: [34, 46],
+    trace: insertionTrace,
+    opName: "Shifts",
+    keySlot: true,
+    vars: ["n", "i", "key", "j", "a[j]", "a[j+1]"],
+    pointers: [
+      { name: "i", color: "--ink", row: 0 },
+      { name: "j", color: "--compare", row: 0 },
+      { name: "j+1", color: "--muted", row: 1 },
+    ],
+    legend: [
+      ["--compare", "Comparing a[j] with key"],
+      ["--swap", "Just copied right"],
+      ["--muted", "Old copy, free to overwrite (dashed)"],
+      ["--min", "key"],
+      ["--settled", "Sorted so far, can still move"],
+    ],
+    note: `<strong>Copies, not swaps.</strong> <code>key</code> is saved once and stays in its own box. Each shift copies <code>a[j]</code> one slot right, so the same value briefly appears twice, and line 44 writes <code>key</code> over the old copy. Try <em>Already sorted</em> (no shifts) against <em>Reversed</em> (the worst case).`,
+  },
+};
+
+const $ = id => document.getElementById(id);
+const MAX_VALUES = 16;
+const MAX_ABS = 999;
+
+let algoKey = "bubble", algo = ALGOS[algoKey];
+let values = [], steps = [], current = 0, timer = null;
+let bars = [], indexEls = [], varEls = [], lineEls = [], pointerEls = [];
+
+function escapeHtml(text) {
+  return text.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+}
+
+function highlight(line) {
+  if (line.startsWith("#")) return `<span class="tok-pre">${escapeHtml(line)}</span>`;
+  const pattern = /\b(using|namespace|void|int|bool|for|while|if|break|return|true|false)\b|\b\d+\b/g;
+  let out = "", last = 0;
+  for (const match of line.matchAll(pattern)) {
+    out += escapeHtml(line.slice(last, match.index));
+    out += `<span class="${match[1] ? "tok-kw" : "tok-num"}">${match[0]}</span>`;
+    last = match.index + match[0].length;
+  }
+  return out + escapeHtml(line.slice(last));
+}
+
+// Only the current function is shown, with its real line numbers from the file.
+function renderSource() {
+  const box = $("source");
+  const [from, to] = algo.lines;
+  box.replaceChildren();
+  lineEls = [];
+  SOURCE.split("\n").slice(from - 1, to).forEach((text, index) => {
+    const row = document.createElement("div");
+    row.className = "source-line";
+    row.innerHTML = `<span class="num">${from + index}</span><span>${highlight(text) || " "}</span>`;
+    box.append(row);
+    lineEls[from + index] = row;
+  });
+  $("sourceTitle").textContent = `bubble_selection_insertion.cpp, lines ${from}–${to}`;
+}
+
+function renderVars() {
+  $("vars").replaceChildren();
+  varEls = algo.vars.map(name => {
+    const wrap = document.createElement("div");
+    wrap.className = "var";
+    const dt = document.createElement("dt");
+    dt.textContent = name;
+    const dd = document.createElement("dd");
+    wrap.append(dt, dd);
+    $("vars").append(wrap);
+    return wrap;
+  });
+}
+
+function renderPointers() {
+  const ruler = $("ruler");
+  pointerEls.forEach(el => el.remove());
+  ruler.style.setProperty("--rows", Math.max(...algo.pointers.map(p => p.row)) + 1);
+  pointerEls = algo.pointers.map(({ name, color, row }) => {
+    const el = document.createElement("div");
+    el.className = "pointer";
+    el.textContent = name;
+    el.style.color = `var(${color})`;
+    el.style.setProperty("--row", row);
+    ruler.append(el);
+    return el;
+  });
+}
+
+function renderLegend() {
+  $("legend").replaceChildren(...algo.legend.map(([color, text]) => {
+    const item = document.createElement("span");
+    const swatch = document.createElement("i");
+    swatch.style.setProperty("--c", `var(${color})`);
+    item.append(swatch, text);
+    return item;
+  }));
+}
+
+function renderTabs() {
+  $("tabs").replaceChildren(...Object.entries(ALGOS).map(([key, { label }]) => {
+    const tab = document.createElement("button");
+    tab.type = "button";
+    tab.role = "tab";
+    tab.id = `tab-${key}`;
+    tab.dataset.algo = key;
+    tab.textContent = label;
+    tab.setAttribute("aria-controls", "algoPanel");
+    tab.addEventListener("click", () => selectAlgo(key));
+    return tab;
+  }));
+}
+
+function selectAlgo(key) {
+  algoKey = key;
+  algo = ALGOS[key];
+  document.querySelectorAll("#tabs button").forEach(tab => {
+    const selected = tab.dataset.algo === key;
+    tab.setAttribute("aria-selected", selected);
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  $("algoPanel").setAttribute("aria-labelledby", `tab-${key}`);
+  $("heading").textContent = `${algo.label}, line by line`;
+  $("fnName").textContent = algo.fn;
+  $("note").innerHTML = algo.note;
+  $("opName").textContent = algo.opName ?? "Swaps";
+  $("keySlot").hidden = !algo.keySlot;
+  document.title = `${algo.label} Visualizer`;
+  location.replace(`#${key}`);
+  renderSource();
+  renderVars();
+  renderPointers();
+  renderLegend();
+  load(values);
+}
+
+function barHeight(value) {
+  const min = Math.min(...values), max = Math.max(...values);
+  const ratio = max === min ? .6 : (value - min) / (max - min);
+  return `${14 + ratio * 74}%`;
+}
+
+function buildBars() {
+  const plot = $("plot"), ruler = $("ruler");
+  plot.style.setProperty("--n", values.length);
+  ruler.style.setProperty("--n", values.length);
+  bars.forEach(bar => bar.remove());
+  indexEls.forEach(el => el.remove());
+
+  bars = values.map(value => {
+    const bar = document.createElement("div");
+    bar.className = "slot bar";
+    bar.style.setProperty("--h", barHeight(value));
+    const fill = document.createElement("div");
+    fill.className = "fill";
+    const label = document.createElement("div");
+    label.className = "value";
+    label.textContent = value;
+    fill.append(label);
+    bar.append(fill);
+    plot.append(bar);
+    return bar;
+  });
+  indexEls = values.map((_, index) => {
+    const el = document.createElement("div");
+    el.className = "index";
+    el.style.setProperty("--pos", index);
+    el.textContent = index;
+    ruler.prepend(el);
+    return el;
+  });
+}
+
+function show(index) {
+  current = index;
+  const step = steps[index];
+  const previous = steps[index - 1];
+  const n = values.length;
+  const [settledLo, settledHi] = step.settled;
+  const isMarked = (name, position) => step.marks[name]?.includes(position) ?? false;
+
+  step.order.forEach((id, position) => {
+    const bar = bars[id];
+    bar.style.setProperty("--pos", position);
+    bar.classList.toggle("is-settled", position >= settledLo && position < settledHi);
+    bar.classList.toggle("is-min", isMarked("min", position));
+    bar.classList.toggle("is-compare", isMarked("compare", position));
+    bar.classList.toggle("is-swap", isMarked("swap", position));
+    bar.classList.toggle("is-stale", isMarked("stale", position));
+    if (step.mem) {
+      bar.style.setProperty("--h", barHeight(step.mem[position]));
+      bar.querySelector(".value").textContent = step.mem[position];
+    }
+  });
+
+  if (algo.keySlot) {
+    $("keyFill").hidden = step.key === null;
+    $("keySlot").classList.toggle("is-compare", !!step.marks.compare?.length);
+    if (step.key !== null) {
+      $("keyFill").style.setProperty("--h", barHeight(step.key));
+      $("keyValue").textContent = step.key;
+    }
+  }
+
+  $("settledZone").style.left = `${settledLo / n * 100}%`;
+  $("settledZone").style.width = `${(settledHi - settledLo) / n * 100}%`;
+
+  pointerEls.forEach((el, pointerIndex) => {
+    const position = step.pointers[pointerIndex];
+    el.hidden = position === null;
+    if (position !== null) el.style.setProperty("--pos", position);
+  });
+
+  lineEls.forEach((row, lineNumber) => row.classList.toggle("active", lineNumber === step.line));
+
+  $("where").textContent = `line ${step.line}: ${lineEls[step.line].lastChild.textContent.trim()}`;
+  $("text").textContent = step.text;
+
+  step.vars.forEach((value, varIndex) => {
+    const wrap = varEls[varIndex];
+    wrap.querySelector("dd").textContent = value === null ? "–" : String(value);
+    wrap.classList.toggle("changed", !!previous && value !== null && previous.vars[varIndex] !== value);
+  });
+
+  $("cComparisons").textContent = step.comparisons;
+  $("cSwaps").textContent = step.swaps;
+  $("scrub").value = index;
+  $("stepLabel").textContent = `step ${index + 1} / ${steps.length}`;
+  $("back").disabled = index === 0;
+  $("forward").disabled = index === steps.length - 1;
+}
+
+function stop() {
+  clearTimeout(timer);
+  timer = null;
+  $("play").textContent = atEnd() ? "Replay" : "Play";
+  $("text").setAttribute("aria-live", "polite");
+}
+
+function atEnd() {
+  return current >= steps.length - 1;
+}
+
+function delay() {
+  return Number($("speed").value);
+}
+
+function applySpeed() {
+  document.documentElement.style.setProperty("--dur", `${Math.min(delay() * .7, 400)}ms`);
+}
+
+function tick() {
+  if (atEnd()) { stop(); return; }
+  show(current + 1);
+  if (atEnd()) { stop(); return; }
+  timer = setTimeout(tick, delay());
+}
+
+function togglePlay() {
+  if (timer !== null) { stop(); return; }
+  if (atEnd()) show(0);
+  $("play").textContent = "Pause";
+  $("text").removeAttribute("aria-live");
+  timer = setTimeout(tick, delay());
+}
+
+function stepTo(index) {
+  clearTimeout(timer);
+  timer = null;
+  show(Math.max(0, Math.min(steps.length - 1, index)));
+  stop();
+}
+
+function load(list) {
+  clearTimeout(timer);
+  timer = null;
+  values = list;
+  steps = algo.trace(values);
+  $("scrub").max = steps.length - 1;
+  $("arrayInput").value = values.join(", ");
+  $("inputError").textContent = "";
+  buildBars();
+  show(0);
+  stop();
+}
+
+function parseInput(text) {
+  const parts = text.split(/[\s,]+/).filter(Boolean);
+  if (parts.length === 0) return { error: "Enter at least one integer." };
+  if (parts.length > MAX_VALUES) return { error: `Use at most ${MAX_VALUES} values.` };
+  if (!parts.every(part => /^-?\d+$/.test(part))) return { error: "Use whole numbers only, separated by commas or spaces." };
+  const list = parts.map(Number);
+  if (list.some(value => Math.abs(value) > MAX_ABS)) return { error: `Keep values between -${MAX_ABS} and ${MAX_ABS}.` };
+  return { list };
+}
+
+const PRESETS = {
+  random: () => Array.from({ length: 8 }, () => 1 + Math.floor(Math.random() * 99)),
+  sorted: () => [10, 20, 30, 40, 50, 60, 70],
+  reversed: () => [70, 60, 50, 40, 30, 20, 10],
+};
+
+$("play").addEventListener("click", togglePlay);
+$("restart").addEventListener("click", () => stepTo(0));
+$("back").addEventListener("click", () => stepTo(current - 1));
+$("forward").addEventListener("click", () => stepTo(current + 1));
+$("scrub").addEventListener("input", event => stepTo(Number(event.target.value)));
+$("speed").addEventListener("change", () => {
+  applySpeed();
+  if (timer !== null) { clearTimeout(timer); timer = setTimeout(tick, delay()); }
+});
+
+$("arrayForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const { list, error } = parseInput($("arrayInput").value);
+  if (error) { $("inputError").textContent = error; return; }
+  load(list);
+});
+document.querySelectorAll("[data-preset]").forEach(button => {
+  button.addEventListener("click", () => load(PRESETS[button.dataset.preset]()));
+});
+
+$("tabs").addEventListener("keydown", event => {
+  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+  const keys = Object.keys(ALGOS);
+  const offset = event.key === "ArrowRight" ? 1 : keys.length - 1;
+  const next = keys[(keys.indexOf(algoKey) + offset) % keys.length];
+  selectAlgo(next);
+  $(`tab-${next}`).focus();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.target.closest("input, select, button, textarea")) return;
+  if (event.key === " ") { event.preventDefault(); togglePlay(); }
+  if (event.key === "ArrowRight") { event.preventDefault(); stepTo(current + 1); }
+  if (event.key === "ArrowLeft") { event.preventDefault(); stepTo(current - 1); }
+});
+
+renderTabs();
+applySpeed();
+values = [5, 1, 4, 2, 8, 3];
+const hashKey = location.hash.slice(1);
+selectAlgo(Object.hasOwn(ALGOS, hashKey) ? hashKey : "bubble");
+</script>
+</body>
+</html>
