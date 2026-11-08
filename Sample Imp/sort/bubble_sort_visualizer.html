@@ -250,6 +250,10 @@
   }
   .counts b { color: var(--ink); font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
+  /* Show operators as typed: some mono fonts render >= and != as single glyphs.
+     Must stay below the rules above, because the font shorthand resets this. */
+  code, .source, .explain .where { font-variant-ligatures: none; }
+
   /* Controls */
   .controls { margin-top: 16px; padding: 14px 16px; }
   .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
