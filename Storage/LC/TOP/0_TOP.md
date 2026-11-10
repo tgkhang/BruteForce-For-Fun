@@ -110,6 +110,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Maximum Non Negative Product in a Matrix
 - [ ] Number of Digit One
 - Increment Submatrices by One (2536) ✅
+- Climbing Stairs (3693) ✅
 
 ## Two Pointers Technique
 
