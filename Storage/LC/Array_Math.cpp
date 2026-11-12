@@ -2,17 +2,6 @@
 using namespace std;
 
 /**
- * Array_Math problems (sorted by number)
- *
- *   7. Reverse Integer
- *   11. Container With Most Water
- *   462. Minimum Moves to Equal Array Elements II
- *   1262. Greatest Sum Divisible by Three
- *   1267. Count Servers that Communicate
- *   2211. Count Collisions on a Road
- */
-
-/**
  * =================================================================================================
  * 7. Reverse Integer
  * =================================================================================================
@@ -77,6 +66,325 @@ int main()
 
 /**
  * =================================================================================================
+ * 15. 3Sum
+ * =================================================================================================
+ */
+
+/*
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<vector<int>> solve(vector<int> &a)
+{
+    vector<vector<int>> res;
+    int n = a.size();
+
+    if (n < 3)
+        return res;
+
+    sort(a.begin(), a.end());
+    for (size_t i = 0; i < n - 2; ++i)
+    {
+        if (i > 0 && a[i] == a[i - 1])
+            continue; // Skip duplicates for 'i'
+
+        int target = 0 - a[i];
+
+        int l = i + 1, r = n - 1;
+
+        while (l < r)
+        {
+            int sum = a[l] + a[r];
+            if (sum < target)
+            {
+                l++;
+                // Eliminates all pairs (current_l, anything)
+            }
+            else if (sum > target)
+            {
+                r++;
+                // eliminate pairs (anything, current_r)
+            }
+            else
+            {
+                res.push_back({a[i], a[l], a[r]});
+
+                while (l < r && a[l] == a[l + 1])
+                    l++;
+                while (l < r && a[r] == a[r - 1])
+                    r--;
+
+                l++, r--;
+            }
+        }
+    }
+
+    return res;
+}
+
+int main()
+{
+    vector<int> a = {-1, 0, 1, 2, -1, -4};
+    vector<vector<int>> res = solve(a);
+    for (const auto &triplet : res)
+    {
+        cout << "[";
+        for (const auto &num : triplet)
+        {
+            cout << num << " ";
+        }
+        cout << "]\n";
+    }
+    return 0;
+}
+
+/**
+ * =================================================================================================
+ * 50. Pow(x, n)
+ * =================================================================================================
+ */
+
+// caculate power include negative
+#include <iostream>
+using namespace std;
+
+double myPow(double x, int n)
+{
+    if (n == 1)
+        return x;
+    if (n == 0)
+        return 1;
+    if (n == -1)
+        return 1.0 / x;
+
+    double t = myPow(x, n / 2);
+    if (n % 2 == 0)
+    {
+        return t * t;
+    }
+    else
+    {
+        if (n > 0)
+        {
+            return t * t * x;
+        }
+        else
+        {
+            return t * t / x;
+        }
+    }
+}
+
+int main()
+{
+    cout << fixed << myPow(2, -2);
+    return 0;
+}
+
+/**
+ * =================================================================================================
+ * 169. Majority Element
+ * =================================================================================================
+ */
+
+// apply boyer-moore voting algorithm to find majority element
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int majorityElement(vector<int> &a)
+{
+    int n = a.size();
+
+    int t = -1, count = 0;
+
+    for (int i = 0; i < n; ++i)
+    {
+        if (count == 0)
+        {
+            t = a[i];
+            count = 1;
+        }
+        else
+        {
+            if (a[i] == t)
+                count++;
+            else
+                count--;
+        }
+    }
+
+    int check = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        if (a[i] == t)
+            check++;
+    }
+    if (check > n / 2)
+        return t;
+    return -1;
+}
+
+int main()
+{
+    vector<int> a = {2, 2, 1, 1, 1, 2, 2};
+    cout << majorityElement(a);
+    return 0;
+}
+
+/**
+ * =================================================================================================
+ * 324. Wiggle Sort II
+ * =================================================================================================
+ */
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+
+void wiggleSort(vector<int> &a)
+{
+    vector<int> res;
+
+    sort(a.begin(), a.end());
+
+    int t = 0, n = a.size(), l = 0, r = n - 1;
+
+    while (t < n)
+    {
+        res.push_back(a[l++]);
+        t++;
+
+        if (t == n)
+            break;
+        res.push_back(a[r--]);
+        t++;
+    }
+
+    a = res;
+}
+ has equal case so wrong
+*/
+
+//[4, 5, 5, 6] wrong
+void wiggleSortWrong(vector<int> &a)
+{
+    vector<int> res;
+
+    sort(a.begin(), a.end());
+
+    int n = a.size();
+    int t;
+    if (n % 2 == 0)
+        t = n / 2;
+    else
+        t = n / 2 + 1;
+
+    int t1 = 0, t2 = t, count = 0;
+    while (count < n)
+    {
+        res.push_back(a[t1++]);
+        count++;
+
+        if (count == n)
+            break;
+        res.push_back(a[t2++]);
+        count++;
+    }
+    a = res;
+}
+
+void wiggleSort(vector<int> &a)
+{
+    int n = a.size();
+    vector<int> sorted = a;
+    sort(sorted.begin(), sorted.end());
+
+    int mid = (n - 1) / 2;
+
+    int left = mid;
+    int right = n - 1;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (i % 2 == 0)
+        {
+            a[i] = sorted[left--];
+        }
+        else
+        {
+            a[i] = sorted[right--];
+        }
+    }
+}
+
+int main()
+{
+    return 0;
+}
+
+/**
+ * =================================================================================================
+ * 400. Nth Digit
+ * =================================================================================================
+ */
+
+// 1-9  : 9  base case return that
+
+// 10-99 : 90
+
+// 100-999: 900
+
+// 1000- 9999 : 9000
+/*
+9*1
+90*2
+900*3
+9000*4
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int findNthDigit(int n)
+{
+    // detect range
+    int digit = 1, numOfNum = 9;
+
+    while (n > digit * numOfNum)
+    {
+        n -= digit * numOfNum;
+        digit++;
+        numOfNum *= 10;
+    }
+
+    int pos = (n - 1) / digit; // n minus first number/ digit
+    int remainder = (n - 1) % digit;
+    int start = (digit == 1) ? 1 : pow(10, digit - 1); // startnumber
+
+    string s = to_string(start + pos);
+    return s[remainder] - '0';
+}
+
+int main()
+{
+    int n = 11;
+    cout << findNthDigit(n);
+    return 0;
+}
+
+/**
+ * =================================================================================================
  * 462. Minimum Moves to Equal Array Elements II
  * =================================================================================================
  */
@@ -92,6 +400,182 @@ int minMoves2(vector<int>& nums) {
 
     for (auto i : nums)
         res += abs(i - t);
+    return res;
+}
+
+/**
+ * =================================================================================================
+ * 611. Valid Triangle Number
+ * =================================================================================================
+ */
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int triangleNumberBruteForce(vector<int> &nums)
+{
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    int count = 0;
+
+    for (int i = 0; i < n - 2; i++)
+    {
+        for (int j = i + 1; j < n - 1; j++)
+        {
+            for (int k = j + 1; k < n; k++)
+            {
+                // Only need to check this condition since array is sorted
+                if (nums[i] + nums[j] > nums[k])
+                {
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
+}
+
+int triangleNumber(vector<int> &nums)
+{
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    int count = 0;
+
+    // chose k and right as 2 valid number
+    for (int k = 2; k < n; k++)
+    {
+        int left = 0, right = k - 1;
+
+        while (left < right)
+        {
+            if (nums[left] + nums[right] > nums[k])
+            {
+                // All pairs (left, left+1), (left, left+2), ..., (left, right)
+                count += (right - left);
+                right--;
+            }
+            else
+            {
+                left++;
+            }
+        }
+    }
+    return count;
+}
+
+int main()
+{
+
+    return 0;
+}
+
+/**
+ * =================================================================================================
+ * 868. Binary Gap
+ * =================================================================================================
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int binaryGap(int n)
+{
+    string s = "";
+
+    int t = n;
+    while (t > 0)
+    {
+        int r = t % 2;
+        s = (char)('0' + r) + s;
+        t /= 2;
+    }
+
+    // init string
+
+    int res = 0;
+    int start = -1;
+    for (int i = 0; i < s.length(); ++i)
+    {
+        if (s[i] == '1')
+        {
+            if (start == -1)
+            {
+                start = i;
+            }
+            else
+            {
+                res = max(res, i - start);
+                start = i;
+            }
+        }
+    }
+    return res;
+}
+
+int main()
+{
+    cout << binaryGap(5);
+    return 0;
+}
+
+/*
+=== TYPICAL SIZES (Platform dependent) ===
+
+COMMON 64-bit SYSTEM:
+- char: 8 bits (1 byte)
+- short: 16 bits (2 bytes)
+- int: 32 bits (4 bytes)
+- long: 64 bits (8 bytes) on Linux/Mac, 32 bits (4 bytes) on Windows
+- long long: 64 bits (8 bytes)
+- float: 32 bits (4 bytes)
+- double: 64 bits (8 bytes)
+- long double: 80/128 bits (varies by compiler)
+- bool: 8 bits (1 byte, but only uses 1 bit logically)
+- void*: 64 bits (8 bytes)
+
+RANGES FOR SIGNED INTEGERS:
+- char: -128 to 127
+- short: -32,768 to 32,767
+- int: -2,147,483,648 to 2,147,483,647
+- long long: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+
+RANGES FOR UNSIGNED INTEGERS:
+- unsigned char: 0 to 255
+- unsigned short: 0 to 65,535
+- unsigned int: 0 to 4,294,967,295
+- unsigned long long: 0 to 18,446,744,073,709,551,615
+
+GUARANTEED MINIMUMS (C++ Standard):
+- char: at least 8 bits
+- short: at least 16 bits
+- int: at least 16 bits
+- long: at least 32 bits
+- long long: at least 64 bits
+
+RELATIONSHIPS GUARANTEED BY STANDARD:
+sizeof(char) <= sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long)
+sizeof(float) <= sizeof(double) <= sizeof(long double)
+*/
+
+int binaryGap(int n)
+{
+    int res = 0;
+    int start = -1;
+
+    for (int i = 0; i < 32; ++i)
+    {
+        if ((n >> i) & 1)
+        { // Check if i-th bit is 1
+            if (start != -1)
+            {
+                res = max(res, i - start);
+            }
+            start = i;
+        }
+    }
     return res;
 }
 
@@ -215,3 +699,107 @@ int main()
 {
     return 0;
 }
+
+/**
+ * =================================================================================================
+ * 2654. Minimum Number of Operations to Make All Array Elements Equal to 1
+ * =================================================================================================
+ */
+
+#include <iostream>
+#include <vector>
+#include <climits>
+#include <algorithm>
+using namespace std;
+
+int minOperations(vector<int> &nums)
+{
+    int n = nums.size(), minLen = INT_MAX;
+
+    int countOnes = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        if (nums[i] == 1)
+            countOnes++;
+    }
+    if (countOnes > 0)
+        return n - countOnes;
+
+    for (int i = 0; i < n; ++i)
+    {
+
+        int tmp = nums[i];
+        for (int j = i + 1; j < n; ++j)
+        {
+            tmp = __gcd(tmp, nums[j]);
+
+            if (tmp == 1)
+            {
+                minLen = min(minLen, j - i + 1);
+                break;
+            }
+        }
+    }
+
+    if (minLen == INT_MAX)
+        return -1;
+    return minLen + n - 2;
+}
+
+int main()
+{
+    return 0;
+}
+
+/**
+ * =================================================================================================
+ * 3105. Longest Strictly Increasing or Strictly Decreasing Subarray
+ * =================================================================================================
+ */
+
+class Solution {
+   public:
+    int longestMonotonicSubarray(vector<int>& nums) {
+        int n = nums.size();
+        int inc = 1, dec = 1, ans = 1;
+
+        for (int i = 1; i < n; ++i) {
+            if (nums[i] > nums[i - 1])
+                inc = inc + 1, dec = 1;  // break dec subarray
+            else if (nums[i] < nums[i - 1])
+                dec = dec + 1, inc = 1;  // break inc subarray
+            else
+                inc = dec = 1;  // equal breaks both
+            ans = max(ans, max(inc, dec));
+        }
+        return ans;
+    }
+};
+
+// i missunderstanding so i create another version harder is not continuous array, like LCS
+class Solution {
+   public:
+    int longestMonotonicSubarray(vector<int>& nums) {
+        int n = nums.size();
+        // dd1 increase, dd2 deccrease
+        vector<int> dd1(n, 1), dd2(n, 1);
+
+        for (int i = 1; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (nums[j] < nums[i])  // increase
+                    dd1[i] = max(dd1[i], dd1[j] + 1);
+                if (nums[j] > nums[i])  // decrease
+                    dd2[i] = max(dd2[i], dd2[j] + 1);
+            }
+        }
+
+        for (auto i : dd1) cout << i << " ";
+        cout << endl;
+        for (auto i : dd2) cout << i << " ";
+
+        int res = 1;
+        for (int i = 0; i < n; ++i)
+            res = max({res, dd1[i], dd2[i]});
+        return res;
+    }
+};
