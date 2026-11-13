@@ -190,6 +190,61 @@ int main() {
 
 /**
  * =================================================================================================
+ * 233. Number of Digit One
+ * =================================================================================================
+ */
+
+// c1: brute force
+class Solution {
+   public:
+    int support1(long long x) {
+        int count = 0;
+        x = abs(x);
+        while (x > 0) {
+            if (x % 10 == 1)
+                count++;
+            x /= 10;
+        }
+        return count;
+    }
+
+    int support2(long long x) {
+        string s = to_string(x);
+        return count(s.begin(), s.end(), '1');
+    }
+
+    int countDigitOne(int n) {
+        int res = 0;
+        for (int i = 1; i <= n; ++i)
+            res += support1(i);
+        return res;
+    }
+};
+// Time Limit Exceeded
+
+// c2: count per digit position, O(log n)
+class Solution {
+   public:
+    int countDigitOne(int n) {
+        long long res = 0;
+        for (long long place = 1; place <= n; place *= 10) {
+            long long high = n / (place * 10);  // digit above cur
+            long long cur = (n / place) % 10;   // the digit at place
+            long long low = n % place;          // digit below cur
+
+            if (cur == 0)
+                res += high * place;
+            else if (cur == 1)
+                res += high * place + low + 1;
+            else
+                res += (high + 1) * place;
+        }
+        return res;
+    }
+};
+
+/**
+ * =================================================================================================
  * 324. Wiggle Sort II
  * =================================================================================================
  */

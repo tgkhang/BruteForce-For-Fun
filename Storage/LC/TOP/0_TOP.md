@@ -108,7 +108,6 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Largest Multiple of Three (1363)
 - [ ] Minimize the Difference Between Target and Chosen Elements (1981)
 - [ ] Maximum Non Negative Product in a Matrix (1594)
-- [ ] Number of Digit One (233)
 - [x] Increment Submatrices by One (2536)
 - [x] Climbing Stairs (3693)
 
@@ -207,7 +206,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Self Crossing (335)
 - [ ] Maximum Number of Visible Points (1610)
 - [ ] Make Sum Divisible by P (1590)
-- [ ] Number of Digit One (233)
+- [x] Number of Digit One (233)
 - [ ] Sell Diminishing-Valued Colored Balls (1648)
 
 ## Heap / Priority Queue
