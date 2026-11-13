@@ -8,266 +8,266 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 - [x] Longest Palindromic Substring(5)
 - [x] Integer to English Words (273)
-- [ ] Compare Version Numbers
+- [ ] Compare Version Numbers (165)
 - [x] Longest Substring Without Repeating Characters (3)
-- [ ] Find the Closest Palindrome
-- [ ] Longest Duplicate Substring
-- [ ] String to Integer (atoi)
-- [ ] Regular Expression Matching
+- [ ] Find the Closest Palindrome (564)
+- [ ] Longest Duplicate Substring (1044)
+- [ ] String to Integer (atoi) (8)
+- [ ] Regular Expression Matching (10)
 - [x] Largest Number (179)
-- [ ] Longest Valid Parentheses
-- [ ] Interleaving String
-- [ ] Decode Ways
+- [ ] Longest Valid Parentheses (32)
+- [ ] Interleaving String (97)
+- [ ] Decode Ways (91)
 - [x] Reverse Words in a String (151)
-- [ ] Wildcard Matching
-- [ ] Valid Parenthesis String
+- [ ] Wildcard Matching (44)
+- [ ] Valid Parenthesis String (678)
 - [x] Remove K Digits (402)
-- [ ] Palindrome Partitioning II
-- [ ] Decode Ways II
-- [ ] Repeated String Match
-- [ ] Validate IP Address
-- [ ] One Edit Distance
-- [ ] Valid Number
-- [ ] Substring with Concatenation of All Words
-- [ ] Strong Password Checker
-- [ ] Fraction to Recurring Decimal
-- [ ] Text Justification
-- [ ] Shortest Palindrome
-- [ ] Making File Names Unique
-- [ ] Decoded String at Index
-- [ ] Split Array With Same Average
+- [ ] Palindrome Partitioning II (132)
+- [ ] Decode Ways II (639)
+- [ ] Repeated String Match (686)
+- [ ] Validate IP Address (468)
+- [ ] One Edit Distance (161)
+- [ ] Valid Number (65)
+- [ ] Substring with Concatenation of All Words (30)
+- [ ] Strong Password Checker (420)
+- [ ] Fraction to Recurring Decimal (166)
+- [ ] Text Justification (68)
+- [ ] Shortest Palindrome (214)
+- [ ] Making File Names Unique (1487)
+- [ ] Decoded String at Index (880)
+- [ ] Split Array With Same Average (805)
 - [x] Count The Repetitions (466)
 
 ## Array & Array Manipulation
 
 - [x] Median of Two Sorted Arrays (4)
 - [x] 3Sum (15)
-- Jump Game II (45)
-- [ ] Maximum Product Subarray
-- [ ] Next Permutation
-- [ ] 132 Pattern
-- [ ] Maximum Number of Events That Can Be Attended
-- [ ] Surrounded Regions
-- [ ] Max Points on a Line
-- [ ] Next Greater Element III
-- [ ] Text Justification
-- [ ] Shortest Unsorted Continuous Subarray
-- [ ] Reverse Pairs
-- [ ] Shortest Subarray with Sum at Least K
-- [ ] Shortest Subarray to be Removed to Make Array Sorted
-- [ ] Water and Jug Problem
-- [ ] Making File Names Unique
-- [ ] Self Crossing
-- [ ] Non-decreasing Array
-- [ ] Continuous Subarray Sum
-- [ ] Dungeon Game
-- [ ] Wiggle Sort II
-- [ ] Ways to Split Array Into Three Subarrays
-- [ ] Maximum Non Negative Product in a Matrix
-- [ ] Frequency of the Most Frequent Element
-- [ ] Maximum Number of Visible Points
+- [ ] Jump Game II (45)
+- [ ] Maximum Product Subarray (152)
+- [ ] Next Permutation (31)
+- [ ] 132 Pattern (456)
+- [ ] Maximum Number of Events That Can Be Attended (1353)
+- [ ] Surrounded Regions (130)
+- [ ] Max Points on a Line (149)
+- [ ] Next Greater Element III (556)
+- [ ] Text Justification (68)
+- [ ] Shortest Unsorted Continuous Subarray (581)
+- [ ] Reverse Pairs (493)
+- [ ] Shortest Subarray with Sum at Least K (862)
+- [ ] Shortest Subarray to be Removed to Make Array Sorted (1574)
+- [ ] Water and Jug Problem (365)
+- [ ] Making File Names Unique (1487)
+- [ ] Self Crossing (335)
+- [ ] Non-decreasing Array (665)
+- [ ] Continuous Subarray Sum (523)
+- [ ] Dungeon Game (174)
+- [ ] Wiggle Sort II (324)
+- [ ] Ways to Split Array Into Three Subarrays (1712)
+- [ ] Maximum Non Negative Product in a Matrix (1594)
+- [ ] Frequency of the Most Frequent Element (1838)
+- [ ] Maximum Number of Visible Points (1610)
 - [x] Closest Room (1845)
-- [ ] Minimize the Difference Between Target and Chosen Elements
+- [ ] Minimize the Difference Between Target and Chosen Elements (1981)
 
 ## Hash Table & Hashing
 
 - [x] Word Ladder (127)
-- [ ] Word Ladder II
+- [ ] Word Ladder II (126)
 - [x] Longest Substring Without Repeating Characters (3)
-- [ ] Fraction to Recurring Decimal
-- [ ] Making File Names Unique
-- [ ] Substring with Concatenation of All Words
-- [ ] Max Points on a Line
-- [ ] All O`one Data Structure
-- [ ] Contains Duplicate III
-- [ ] Invalid Transactions
-- [ ] Count Good Meals
-- [ ] Make Sum Divisible by P
-- [ ] Line Reflection
+- [ ] Fraction to Recurring Decimal (166)
+- [ ] Making File Names Unique (1487)
+- [ ] Substring with Concatenation of All Words (30)
+- [ ] Max Points on a Line (149)
+- [ ] All O`one Data Structure (432)
+- [ ] Contains Duplicate III (220)
+- [ ] Invalid Transactions (1169)
+- [ ] Count Good Meals (1711)
+- [ ] Make Sum Divisible by P (1590)
+- [ ] Line Reflection (356)
 
 ## Dynamic Programming (DP)
 
-- [ ] Longest Palindromic Substring
-- [ ] Jump Game II
-- [ ] Maximum Product Subarray
-- [ ] Regular Expression Matching
-- [ ] Best Time to Buy and Sell Stock IV
-- [ ] Longest Valid Parentheses
-- [ ] Interleaving String
-- [ ] Decode Ways
-- [ ] Wildcard Matching
-- [ ] Valid Parenthesis String
-- [ ] Dungeon Game
+- [ ] Longest Palindromic Substring (5)
+- [ ] Jump Game II (45)
+- [ ] Maximum Product Subarray (152)
+- [ ] Regular Expression Matching (10)
+- [ ] Best Time to Buy and Sell Stock IV (188)
+- [ ] Longest Valid Parentheses (32)
+- [ ] Interleaving String (97)
+- [ ] Decode Ways (91)
+- [ ] Wildcard Matching (44)
+- [ ] Valid Parenthesis String (678)
+- [ ] Dungeon Game (174)
 - [x] Count The Repetitions (466)
-- [ ] Palindrome Partitioning II
-- [ ] Decode Ways II
-- [ ] Maximum Score from Performing Multiplication Operations
-- [ ] Super Egg Drop
-- [ ] Integer Replacement
-- [ ] Split Array With Same Average
-- [ ] Largest Multiple of Three
-- [ ] Minimize the Difference Between Target and Chosen Elements
-- [ ] Maximum Non Negative Product in a Matrix
-- [ ] Number of Digit One
+- [ ] Palindrome Partitioning II (132)
+- [ ] Decode Ways II (639)
+- [ ] Maximum Score from Performing Multiplication Operations (1770)
+- [ ] Super Egg Drop (887)
+- [ ] Integer Replacement (397)
+- [ ] Split Array With Same Average (805)
+- [ ] Largest Multiple of Three (1363)
+- [ ] Minimize the Difference Between Target and Chosen Elements (1981)
+- [ ] Maximum Non Negative Product in a Matrix (1594)
+- [ ] Number of Digit One (233)
 - [x] Increment Submatrices by One (2536)
 - [x] Climbing Stairs (3693)
 
 ## Two Pointers Technique
 
 - [x] Valid Triangle Number (611)
-- [ ] Compare Version Numbers
+- [ ] Compare Version Numbers (165)
 - [x] 3Sum (15)
-- [ ] Next Permutation
+- [ ] Next Permutation (31)
 - [x] Reverse Words in a String (151)
-- [ ] One Edit Distance
-- [ ] Shortest Unsorted Continuous Subarray
-- [ ] Ways to Split Array Into Three Subarrays
-- [ ] Sum of Square Numbers
+- [ ] One Edit Distance (161)
+- [ ] Shortest Unsorted Continuous Subarray (581)
+- [ ] Ways to Split Array Into Three Subarrays (1712)
+- [ ] Sum of Square Numbers (633)
 
 ## Binary Search
 
 - [x] Median of Two Sorted Arrays (4)
-- [ ] 132 Pattern
-- [ ] Search in Rotated Sorted Array II
+- [ ] 132 Pattern (456)
+- [ ] Search in Rotated Sorted Array II (81)
 - [x] Nth Digit (400)
-- [ ] Shortest Subarray with Sum at Least K
-- [ ] Reverse Pairs
+- [ ] Shortest Subarray with Sum at Least K (862)
+- [ ] Reverse Pairs (493)
 - [x] Closest Room (1845)
-- [ ] Nth Highest Salary
-- [ ] Super Egg Drop
-- [ ] Minimum Space Wasted From Packaging
-- [ ] Frequency of the Most Frequent Element
-- [ ] Longest Duplicate Substring
-- [ ] Longest Common Subpath
+- [ ] Nth Highest Salary (177)
+- [ ] Super Egg Drop (887)
+- [ ] Minimum Space Wasted From Packaging (1889)
+- [ ] Frequency of the Most Frequent Element (1838)
+- [ ] Longest Duplicate Substring (1044)
+- [ ] Longest Common Subpath (1923)
 - [x] Pow(x, n) (50)
 
 ## Sorting & Order
 
 - [x] 3Sum (15)
 - [x] Wiggle Sort II (324)
-- [ ] Maximum Number of Events That Can Be Attended
-- [ ] Reverse Pairs
+- [ ] Maximum Number of Events That Can Be Attended (1353)
+- [ ] Reverse Pairs (493)
 - [x] Remove K Digits (402)
-- [ ] Invalid Transactions
-- [ ] Frequency of the Most Frequent Element
+- [ ] Invalid Transactions (1169)
+- [ ] Frequency of the Most Frequent Element (1838)
 - [x] Closest Room (1845)
 
 ## Stack & Monotonic Stack
 
-- [ ] 132 Pattern
-- [ ] Longest Valid Parentheses
-- [ ] Valid Parenthesis String
+- [ ] 132 Pattern (456)
+- [ ] Longest Valid Parentheses (32)
+- [ ] Valid Parenthesis String (678)
 - [x] Remove K Digits (402)
-- [ ] Create Maximum Number
-- [ ] Shortest Unsorted Continuous Subarray
-- [ ] Decoded String at Index
+- [ ] Create Maximum Number (321)
+- [ ] Shortest Unsorted Continuous Subarray (581)
+- [ ] Decoded String at Index (880)
 
 ## Sliding Window
 
 - [x] Longest Substring Without Repeating Characters (3)
 - [x] Minimum Number of Operations to Make All Array Elements Equal to 1 (2654)
-- [ ] Substring with Concatenation of All Words
-- [ ] Contains Duplicate III
-- [ ] Longest Duplicate Substring
-- [ ] Frequency of the Most Frequent Element
-- [ ] Maximum Number of Visible Points
+- [ ] Substring with Concatenation of All Words (30)
+- [ ] Contains Duplicate III (220)
+- [ ] Longest Duplicate Substring (1044)
+- [ ] Frequency of the Most Frequent Element (1838)
+- [ ] Maximum Number of Visible Points (1610)
 
 ## Tree & Graph (including BFS/DFS/Topological Sort)
 
-- [ ] Alien Dictionary
-- [ ] Validate Binary Search Tree
-- [ ] Redundant Connection II
-- [ ] Kth Ancestor of a Tree Node
-- [ ] Surrounded Regions
-- [ ] Water and Jug Problem
+- [ ] Alien Dictionary (269)
+- [ ] Validate Binary Search Tree (98)
+- [ ] Redundant Connection II (685)
+- [ ] Kth Ancestor of a Tree Node (1483)
+- [ ] Surrounded Regions (130)
+- [ ] Water and Jug Problem (365)
 
 ## Greedy Algorithms
 
 - [x] Maximum Product Subarray (152)
 - [x] Largest Number (179)
 - Strong Password Checker (420)
-- [ ] Valid Parenthesis String
+- [ ] Valid Parenthesis String (678)
 - [x] Remove K Digits (402)
-- [ ] Maximum Number of Events That Can Be Attended
-- [ ] Split Array With Same Average
-- [ ] Create Maximum Number
-- [ ] Frequency of the Most Frequent Element
-- [ ] Sell Diminishing-Valued Colored Balls
+- [ ] Maximum Number of Events That Can Be Attended (1353)
+- [ ] Split Array With Same Average (805)
+- [ ] Create Maximum Number (321)
+- [ ] Frequency of the Most Frequent Element (1838)
+- [ ] Sell Diminishing-Valued Colored Balls (1648)
 
 ## Math & Number Theory
 
-- [ ] Integer to English Words
-- [ ] Find the Closest Palindrome
-- [ ] Prime Palindrome
+- [ ] Integer to English Words (273)
+- [ ] Find the Closest Palindrome (564)
+- [ ] Prime Palindrome (866)
 - [x] Pow(x, n) (50)
-- [ ] Fraction to Recurring Decimal
-- [ ] Next Greater Element III
-- [ ] Sum of Square Numbers
+- [ ] Fraction to Recurring Decimal (166)
+- [ ] Next Greater Element III (556)
+- [ ] Sum of Square Numbers (633)
 - [x] Nth Digit (400)
-- [ ] Self Crossing
-- [ ] Maximum Number of Visible Points
-- [ ] Make Sum Divisible by P
-- [ ] Number of Digit One
-- [ ] Sell Diminishing-Valued Colored Balls
+- [ ] Self Crossing (335)
+- [ ] Maximum Number of Visible Points (1610)
+- [ ] Make Sum Divisible by P (1590)
+- [ ] Number of Digit One (233)
+- [ ] Sell Diminishing-Valued Colored Balls (1648)
 
 ## Heap / Priority Queue
 
-- [ ] Maximum Number of Events That Can Be Attended
-- [ ] Sell Diminishing-Valued Colored Balls
-- [ ] Design Twitter
-- [ ] Strong Password Checker
+- [ ] Maximum Number of Events That Can Be Attended (1353)
+- [ ] Sell Diminishing-Valued Colored Balls (1648)
+- [ ] Design Twitter (355)
+- [ ] Strong Password Checker (420)
 
 ## Linked List
 
 - [x] Rotate List (61)
-- All O`one Data Structure (432)
-- [ ] Insert into a Sorted Circular Linked List
-- [ ] Design Linked List
-- [ ] Design Twitter
+- [ ] All O`one Data Structure (432)
+- [ ] Insert into a Sorted Circular Linked List (708)
+- [ ] Design Linked List (707)
+- [ ] Design Twitter (355)
 
 ## Bit Manipulation / Bitmask
 
-- [ ] Divide Two Integers
-- [ ] Split Array With Same Average
-- [ ] Integer Replacement
+- [ ] Divide Two Integers (29)
+- [ ] Split Array With Same Average (805)
+- [ ] Integer Replacement (397)
 - [x] Binary Gap (868)
 
 ## Design / System Design
 
-- [ ] All O`one Data Structure
-- [ ] Design Twitter
-- [ ] Design Linked List
-- [ ] Kth Ancestor of a Tree Node
+- [ ] All O`one Data Structure (432)
+- [ ] Design Twitter (355)
+- [ ] Design Linked List (707)
+- [ ] Kth Ancestor of a Tree Node (1483)
 
 ## Database / SQL
 
-- [ ] Nth Highest Salary
-- [ ] Word Frequency
+- [ ] Nth Highest Salary (177)
+- [ ] Word Frequency (192)
 
 ## Advanced Patterns
 
 ### Rolling Hash / Suffix Array / Hash Function
 
-- [ ] Longest Duplicate Substring
-- [ ] Shortest Palindrome
-- [ ] Longest Common Subpath
+- [ ] Longest Duplicate Substring (1044)
+- [ ] Shortest Palindrome (214)
+- [ ] Longest Common Subpath (1923)
 
 ### Divide and Conquer
 
 - [x] Median of Two Sorted Arrays (4)
-- [ ] Reverse Pairs
-- [ ] Wiggle Sort II
+- [ ] Reverse Pairs (493)
+- [ ] Wiggle Sort II (324)
 
 ### Union Find
 
-- [ ] Surrounded Regions
-- [ ] Redundant Connection II
+- [ ] Surrounded Regions (130)
+- [ ] Redundant Connection II (685)
 
 ### Geometry
 
-- [ ] Max Points on a Line
-- [ ] Self Crossing
-- [ ] Maximum Number of Visible Points
+- [ ] Max Points on a Line (149)
+- [ ] Self Crossing (335)
+- [ ] Maximum Number of Visible Points (1610)
 
 ### Algorithmic Techniques
 
