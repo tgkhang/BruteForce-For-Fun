@@ -7,9 +7,6 @@ using namespace std;
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-using namespace std;
-
 /*
 
     int res = a[0], cur = a[0];
@@ -51,11 +48,6 @@ int maxProduct(vector<int> &a)
     return res;
 }
 
-int main()
-{
-    return 0;
-}
-
 /**
  * =================================================================================================
  * 1277. Count Square Submatrices with All Ones
@@ -81,9 +73,6 @@ Total number of squares = 10 + 4 + 1 = 15.
 
 explain: https://www.youtube.com/watch?v=5Li-cR5h_uw
 */
-
-#include <bits/stdc++.h>
-using namespace std;
 
 // dp[i][j] =x  : x*x is the maximum square can perform
 
@@ -156,8 +145,6 @@ There is 1 rectangle of side 3x2.
 Total number of rectangles = 8 + 5 + 2 + 4 + 2 + 2 + 1 = 24.
 */
 
-#include <bits/stdc++.h>
-using namespace std;
 
 // dp[i][j] =x  : x*x is the maximum rectangle can perform
 
@@ -223,8 +210,6 @@ int main()
 
 // https://leetcode.com/problems/increment-submatrices-by-one/solutions/7347235/solution-by-la_castille-yqjk/
 
-#include <bits/stdc++.h>
-using namespace std;
 
 vector<vector<int>> rangeAddQueries(int n, vector<vector<int>> &queries)
 {
@@ -259,20 +244,12 @@ vector<vector<int>> rangeAddQueries(int n, vector<vector<int>> &queries)
     return res;
 }
 
-int main()
-{
-    return 0;
-}
 
 /**
  * =================================================================================================
  * 3494. Find the Minimum Amount of Time to Brew Potions
  * =================================================================================================
  */
-
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
 
 // dp[i][j] time for ith wizzard to finish j-th potion
 ll minTime2d(vector<int> &skill, vector<int> &mana)
@@ -362,9 +339,6 @@ int main()
  * 3693. Climbing Stairs II
  * =================================================================================================
  */
-
-#include <bits/stdc++.h>
-using namespace std;
 
 // 3693. Climbing Stairs
 

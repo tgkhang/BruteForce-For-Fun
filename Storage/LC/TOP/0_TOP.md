@@ -6,22 +6,22 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ## String & String Algorithms
 
-- Longest Palindromic Substring(5) ✅
-- Integer to English Words (273) ✅
+- [x] Longest Palindromic Substring(5)
+- [x] Integer to English Words (273)
 - [ ] Compare Version Numbers
-- Longest Substring Without Repeating Characters (3) ✅
+- [x] Longest Substring Without Repeating Characters (3)
 - [ ] Find the Closest Palindrome
 - [ ] Longest Duplicate Substring
 - [ ] String to Integer (atoi)
 - [ ] Regular Expression Matching
-- Largest Number (179) ✅
+- [x] Largest Number (179)
 - [ ] Longest Valid Parentheses
 - [ ] Interleaving String
 - [ ] Decode Ways
-- Reverse Words in a String (151) ✅
+- [x] Reverse Words in a String (151)
 - [ ] Wildcard Matching
 - [ ] Valid Parenthesis String
-- Remove K Digits (402) ✅
+- [x] Remove K Digits (402)
 - [ ] Palindrome Partitioning II
 - [ ] Decode Ways II
 - [ ] Repeated String Match
@@ -36,12 +36,12 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Making File Names Unique
 - [ ] Decoded String at Index
 - [ ] Split Array With Same Average
-- Count The Repetitions (466) ✅
+- [x] Count The Repetitions (466)
 
 ## Array & Array Manipulation
 
-- Median of Two Sorted Arrays (4) ✅
-- 3Sum (15) ✅
+- [x] Median of Two Sorted Arrays (4)
+- [x] 3Sum (15)
 - Jump Game II (45)
 - [ ] Maximum Product Subarray
 - [ ] Next Permutation
@@ -66,14 +66,14 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Maximum Non Negative Product in a Matrix
 - [ ] Frequency of the Most Frequent Element
 - [ ] Maximum Number of Visible Points
-- Closest Room (1845) ✅
+- [x] Closest Room (1845)
 - [ ] Minimize the Difference Between Target and Chosen Elements
 
 ## Hash Table & Hashing
 
-- Word Ladder (127) ✅
+- [x] Word Ladder (127)
 - [ ] Word Ladder II
-- Longest Substring Without Repeating Characters (3) ✅
+- [x] Longest Substring Without Repeating Characters (3)
 - [ ] Fraction to Recurring Decimal
 - [ ] Making File Names Unique
 - [ ] Substring with Concatenation of All Words
@@ -98,7 +98,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Wildcard Matching
 - [ ] Valid Parenthesis String
 - [ ] Dungeon Game
-- Count The Repetitions (466) ✅
+- [x] Count The Repetitions (466)
 - [ ] Palindrome Partitioning II
 - [ ] Decode Ways II
 - [ ] Maximum Score from Performing Multiplication Operations
@@ -109,16 +109,16 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Minimize the Difference Between Target and Chosen Elements
 - [ ] Maximum Non Negative Product in a Matrix
 - [ ] Number of Digit One
-- Increment Submatrices by One (2536) ✅
-- Climbing Stairs (3693) ✅
+- [x] Increment Submatrices by One (2536)
+- [x] Climbing Stairs (3693)
 
 ## Two Pointers Technique
 
-- Valid Triangle Number (611) ✅
+- [x] Valid Triangle Number (611)
 - [ ] Compare Version Numbers
-- 3Sum (15) ✅
+- [x] 3Sum (15)
 - [ ] Next Permutation
-- Reverse Words in a String (151) ✅
+- [x] Reverse Words in a String (151)
 - [ ] One Edit Distance
 - [ ] Shortest Unsorted Continuous Subarray
 - [ ] Ways to Split Array Into Three Subarrays
@@ -126,46 +126,46 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ## Binary Search
 
-- Median of Two Sorted Arrays (4) ✅
+- [x] Median of Two Sorted Arrays (4)
 - [ ] 132 Pattern
 - [ ] Search in Rotated Sorted Array II
-- Nth Digit (400) ✅
+- [x] Nth Digit (400)
 - [ ] Shortest Subarray with Sum at Least K
 - [ ] Reverse Pairs
-- Closest Room (1845) ✅
+- [x] Closest Room (1845)
 - [ ] Nth Highest Salary
 - [ ] Super Egg Drop
 - [ ] Minimum Space Wasted From Packaging
 - [ ] Frequency of the Most Frequent Element
 - [ ] Longest Duplicate Substring
 - [ ] Longest Common Subpath
-- Pow(x, n) (50) ✅
+- [x] Pow(x, n) (50)
 
 ## Sorting & Order
 
-- 3Sum (15) ✅
-- Wiggle Sort II (324) ✅
+- [x] 3Sum (15)
+- [x] Wiggle Sort II (324)
 - [ ] Maximum Number of Events That Can Be Attended
 - [ ] Reverse Pairs
-- Remove K Digits (402) ✅
+- [x] Remove K Digits (402)
 - [ ] Invalid Transactions
 - [ ] Frequency of the Most Frequent Element
-- Closest Room (1845) ✅
+- [x] Closest Room (1845)
 
 ## Stack & Monotonic Stack
 
 - [ ] 132 Pattern
 - [ ] Longest Valid Parentheses
 - [ ] Valid Parenthesis String
-- Remove K Digits (402) ✅
+- [x] Remove K Digits (402)
 - [ ] Create Maximum Number
 - [ ] Shortest Unsorted Continuous Subarray
 - [ ] Decoded String at Index
 
 ## Sliding Window
 
-- Longest Substring Without Repeating Characters (3) ✅
-- Minimum Number of Operations to Make All Array Elements Equal to 1 (2654) ✅
+- [x] Longest Substring Without Repeating Characters (3)
+- [x] Minimum Number of Operations to Make All Array Elements Equal to 1 (2654)
 - [ ] Substring with Concatenation of All Words
 - [ ] Contains Duplicate III
 - [ ] Longest Duplicate Substring
@@ -183,11 +183,11 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ## Greedy Algorithms
 
-- Maximum Product Subarray (152) ✅
-- Largest Number (179) ✅
+- [x] Maximum Product Subarray (152)
+- [x] Largest Number (179)
 - Strong Password Checker (420)
 - [ ] Valid Parenthesis String
-- Remove K Digits (402) ✅
+- [x] Remove K Digits (402)
 - [ ] Maximum Number of Events That Can Be Attended
 - [ ] Split Array With Same Average
 - [ ] Create Maximum Number
@@ -199,11 +199,11 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Integer to English Words
 - [ ] Find the Closest Palindrome
 - [ ] Prime Palindrome
-- Pow(x, n) (50) ✅
+- [x] Pow(x, n) (50)
 - [ ] Fraction to Recurring Decimal
 - [ ] Next Greater Element III
 - [ ] Sum of Square Numbers
-- Nth Digit (400) ✅
+- [x] Nth Digit (400)
 - [ ] Self Crossing
 - [ ] Maximum Number of Visible Points
 - [ ] Make Sum Divisible by P
@@ -219,7 +219,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ## Linked List
 
-- Rotate List (61) ✅
+- [x] Rotate List (61)
 - All O`one Data Structure (432)
 - [ ] Insert into a Sorted Circular Linked List
 - [ ] Design Linked List
@@ -230,7 +230,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 - [ ] Divide Two Integers
 - [ ] Split Array With Same Average
 - [ ] Integer Replacement
-- Binary Gap (868) ✅
+- [x] Binary Gap (868)
 
 ## Design / System Design
 
@@ -254,7 +254,7 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ### Divide and Conquer
 
-- Median of Two Sorted Arrays (4) ✅
+- [x] Median of Two Sorted Arrays (4)
 - [ ] Reverse Pairs
 - [ ] Wiggle Sort II
 
@@ -271,4 +271,4 @@ If I had to restart doing LeetCode practice and build my basics from 0 in 2025, 
 
 ### Algorithmic Techniques
 
-- Majority Element (169) ✅
+- [x] Majority Element (169)

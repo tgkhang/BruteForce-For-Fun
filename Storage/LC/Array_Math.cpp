@@ -35,18 +35,11 @@ int reverse(int x) {
  * =================================================================================================
  */
 
-#include <iostream>
-#include <string>
-#include <vector>
-using namespace std;
-
-int maxArea(vector<int> &height)
-{
+int maxArea(vector<int>& height) {
     int left = 0, right = height.size() - 1;
     int maxArea = 0;
 
-    while (left < right)
-    {
+    while (left < right) {
         maxArea = max(maxArea, min(height[left], height[right]) * (right - left));
 
         if (height[left] < height[right])
@@ -57,11 +50,6 @@ int maxArea(vector<int> &height)
     }
 
     return maxArea;
-}
-
-int main()
-{
-    return 0;
 }
 
 /**
@@ -75,13 +63,7 @@ Input: nums = [-1,0,1,2,-1,-4]
 Output: [[-1,-1,2],[-1,0,1]]
 */
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-vector<vector<int>> solve(vector<int> &a)
-{
+vector<vector<int>> solve(vector<int>& a) {
     vector<vector<int>> res;
     int n = a.size();
 
@@ -89,30 +71,23 @@ vector<vector<int>> solve(vector<int> &a)
         return res;
 
     sort(a.begin(), a.end());
-    for (size_t i = 0; i < n - 2; ++i)
-    {
+    for (size_t i = 0; i < n - 2; ++i) {
         if (i > 0 && a[i] == a[i - 1])
-            continue; // Skip duplicates for 'i'
+            continue;  // Skip duplicates for 'i'
 
         int target = 0 - a[i];
 
         int l = i + 1, r = n - 1;
 
-        while (l < r)
-        {
+        while (l < r) {
             int sum = a[l] + a[r];
-            if (sum < target)
-            {
+            if (sum < target) {
                 l++;
                 // Eliminates all pairs (current_l, anything)
-            }
-            else if (sum > target)
-            {
+            } else if (sum > target) {
                 r++;
                 // eliminate pairs (anything, current_r)
-            }
-            else
-            {
+            } else {
                 res.push_back({a[i], a[l], a[r]});
 
                 while (l < r && a[l] == a[l + 1])
@@ -128,15 +103,12 @@ vector<vector<int>> solve(vector<int> &a)
     return res;
 }
 
-int main()
-{
+int main() {
     vector<int> a = {-1, 0, 1, 2, -1, -4};
     vector<vector<int>> res = solve(a);
-    for (const auto &triplet : res)
-    {
+    for (const auto& triplet : res) {
         cout << "[";
-        for (const auto &num : triplet)
-        {
+        for (const auto& num : triplet) {
             cout << num << " ";
         }
         cout << "]\n";
@@ -151,11 +123,7 @@ int main()
  */
 
 // caculate power include negative
-#include <iostream>
-using namespace std;
-
-double myPow(double x, int n)
-{
+double myPow(double x, int n) {
     if (n == 1)
         return x;
     if (n == 0)
@@ -165,24 +133,16 @@ double myPow(double x, int n)
 
     double t = myPow(x, n / 2);
     if (n % 2 == 0)
-    {
         return t * t;
-    }
-    else
-    {
+    else {
         if (n > 0)
-        {
             return t * t * x;
-        }
         else
-        {
             return t * t / x;
-        }
     }
 }
 
-int main()
-{
+int main() {
     cout << fixed << myPow(2, -2);
     return 0;
 }
@@ -195,26 +155,16 @@ int main()
 
 // apply boyer-moore voting algorithm to find majority element
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-int majorityElement(vector<int> &a)
-{
+int majorityElement(vector<int>& a) {
     int n = a.size();
 
     int t = -1, count = 0;
 
-    for (int i = 0; i < n; ++i)
-    {
-        if (count == 0)
-        {
+    for (int i = 0; i < n; ++i) {
+        if (count == 0) {
             t = a[i];
             count = 1;
-        }
-        else
-        {
+        } else {
             if (a[i] == t)
                 count++;
             else
@@ -223,8 +173,7 @@ int majorityElement(vector<int> &a)
     }
 
     int check = 0;
-    for (int i = 0; i < n; ++i)
-    {
+    for (int i = 0; i < n; ++i) {
         if (a[i] == t)
             check++;
     }
@@ -233,8 +182,7 @@ int majorityElement(vector<int> &a)
     return -1;
 }
 
-int main()
-{
+int main() {
     vector<int> a = {2, 2, 1, 1, 1, 2, 2};
     cout << majorityElement(a);
     return 0;
@@ -245,10 +193,6 @@ int main()
  * 324. Wiggle Sort II
  * =================================================================================================
  */
-
-#include <bits/stdc++.h>
-
-using namespace std;
 
 /*
 
@@ -277,8 +221,7 @@ void wiggleSort(vector<int> &a)
 */
 
 //[4, 5, 5, 6] wrong
-void wiggleSortWrong(vector<int> &a)
-{
+void wiggleSortWrong(vector<int>& a) {
     vector<int> res;
 
     sort(a.begin(), a.end());
@@ -291,8 +234,7 @@ void wiggleSortWrong(vector<int> &a)
         t = n / 2 + 1;
 
     int t1 = 0, t2 = t, count = 0;
-    while (count < n)
-    {
+    while (count < n) {
         res.push_back(a[t1++]);
         count++;
 
@@ -304,8 +246,7 @@ void wiggleSortWrong(vector<int> &a)
     a = res;
 }
 
-void wiggleSort(vector<int> &a)
-{
+void wiggleSort(vector<int>& a) {
     int n = a.size();
     vector<int> sorted = a;
     sort(sorted.begin(), sorted.end());
@@ -315,22 +256,13 @@ void wiggleSort(vector<int> &a)
     int left = mid;
     int right = n - 1;
 
-    for (int i = 0; i < n; i++)
-    {
-        if (i % 2 == 0)
-        {
+    for (int i = 0; i < n; i++) {
+        if (i % 2 == 0) {
             a[i] = sorted[left--];
-        }
-        else
-        {
+        } else {
             a[i] = sorted[right--];
         }
     }
-}
-
-int main()
-{
-    return 0;
 }
 
 /**
@@ -353,31 +285,25 @@ int main()
 9000*4
 */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-int findNthDigit(int n)
-{
+int findNthDigit(int n) {
     // detect range
     int digit = 1, numOfNum = 9;
 
-    while (n > digit * numOfNum)
-    {
+    while (n > digit * numOfNum) {
         n -= digit * numOfNum;
         digit++;
         numOfNum *= 10;
     }
 
-    int pos = (n - 1) / digit; // n minus first number/ digit
+    int pos = (n - 1) / digit;  // n minus first number/ digit
     int remainder = (n - 1) % digit;
-    int start = (digit == 1) ? 1 : pow(10, digit - 1); // startnumber
+    int start = (digit == 1) ? 1 : pow(10, digit - 1);  // startnumber
 
     string s = to_string(start + pos);
     return s[remainder] - '0';
 }
 
-int main()
-{
+int main() {
     int n = 11;
     cout << findNthDigit(n);
     return 0;
@@ -409,27 +335,16 @@ int minMoves2(vector<int>& nums) {
  * =================================================================================================
  */
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
-int triangleNumberBruteForce(vector<int> &nums)
-{
+int triangleNumberBruteForce(vector<int>& nums) {
     sort(nums.begin(), nums.end());
     int n = nums.size();
     int count = 0;
 
-    for (int i = 0; i < n - 2; i++)
-    {
-        for (int j = i + 1; j < n - 1; j++)
-        {
-            for (int k = j + 1; k < n; k++)
-            {
+    for (int i = 0; i < n - 2; i++) {
+        for (int j = i + 1; j < n - 1; j++) {
+            for (int k = j + 1; k < n; k++) {
                 // Only need to check this condition since array is sorted
-                if (nums[i] + nums[j] > nums[k])
-                {
+                if (nums[i] + nums[j] > nums[k]) {
                     count++;
                 }
             }
@@ -438,38 +353,26 @@ int triangleNumberBruteForce(vector<int> &nums)
     return count;
 }
 
-int triangleNumber(vector<int> &nums)
-{
+int triangleNumber(vector<int>& nums) {
     sort(nums.begin(), nums.end());
     int n = nums.size();
     int count = 0;
 
     // chose k and right as 2 valid number
-    for (int k = 2; k < n; k++)
-    {
+    for (int k = 2; k < n; k++) {
         int left = 0, right = k - 1;
 
-        while (left < right)
-        {
-            if (nums[left] + nums[right] > nums[k])
-            {
+        while (left < right) {
+            if (nums[left] + nums[right] > nums[k]) {
                 // All pairs (left, left+1), (left, left+2), ..., (left, right)
                 count += (right - left);
                 right--;
-            }
-            else
-            {
+            } else {
                 left++;
             }
         }
     }
     return count;
-}
-
-int main()
-{
-
-    return 0;
 }
 
 /**
@@ -478,16 +381,11 @@ int main()
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-int binaryGap(int n)
-{
+int binaryGap(int n) {
     string s = "";
 
     int t = n;
-    while (t > 0)
-    {
+    while (t > 0) {
         int r = t % 2;
         s = (char)('0' + r) + s;
         t /= 2;
@@ -497,16 +395,11 @@ int binaryGap(int n)
 
     int res = 0;
     int start = -1;
-    for (int i = 0; i < s.length(); ++i)
-    {
-        if (s[i] == '1')
-        {
-            if (start == -1)
-            {
+    for (int i = 0; i < s.length(); ++i) {
+        if (s[i] == '1') {
+            if (start == -1) {
                 start = i;
-            }
-            else
-            {
+            } else {
                 res = max(res, i - start);
                 start = i;
             }
@@ -515,8 +408,7 @@ int binaryGap(int n)
     return res;
 }
 
-int main()
-{
+int main() {
     cout << binaryGap(5);
     return 0;
 }
@@ -560,17 +452,13 @@ sizeof(char) <= sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long
 sizeof(float) <= sizeof(double) <= sizeof(long double)
 */
 
-int binaryGap(int n)
-{
+int binaryGap(int n) {
     int res = 0;
     int start = -1;
 
-    for (int i = 0; i < 32; ++i)
-    {
-        if ((n >> i) & 1)
-        { // Check if i-th bit is 1
-            if (start != -1)
-            {
+    for (int i = 0; i < 32; ++i) {
+        if ((n >> i) & 1) {  // Check if i-th bit is 1
+            if (start != -1) {
                 res = max(res, i - start);
             }
             start = i;
@@ -585,48 +473,42 @@ int binaryGap(int n)
  * =================================================================================================
  */
 
-#include<bits/stdc++.h>
-using namespace std;
-
-
-
-    int maxSumDivThree(vector<int>& a) {
-        vector<int> one, two;
-        int res = 0;
-        for (auto i : a) {
-            res += i;
-            if (i % 3 == 1) {
-                one.push_back(i);
-            } else if (i % 3 == 2) {
-                two.push_back(i);
-            }
+int maxSumDivThree(vector<int>& a) {
+    vector<int> one, two;
+    int res = 0;
+    for (auto i : a) {
+        res += i;
+        if (i % 3 == 1) {
+            one.push_back(i);
+        } else if (i % 3 == 2) {
+            two.push_back(i);
         }
-
-        sort(one.begin(), one.end());
-        sort(two.begin(), two.end());
-        int r = res % 3;
-
-        if (r == 0)
-            return res;
-
-        if (r == 1) {
-            // remove smallest r=1,
-            int opt1 = (!one.empty()) ? one[0] : INT_MAX;
-            // remove 2 smallest r=2  => 4
-            int opt2 = (two.size() >= 2) ? two[0] + two[1] : INT_MAX;
-            res -= min(opt1, opt2);
-        } else { // r=2
-            // remove smalleset r2
-            int opt1 = (!two.empty()) ? two[0] : INT_MAX ;
-            // remove 2 smallest r1
-            int opt2 = (one.size() >= 2) ? one[0] + one[1] : INT_MAX;
-            res -= min(opt1, opt2);
-        }
-
-        return res;
     }
-int main()
-{
+
+    sort(one.begin(), one.end());
+    sort(two.begin(), two.end());
+    int r = res % 3;
+
+    if (r == 0)
+        return res;
+
+    if (r == 1) {
+        // remove smallest r=1,
+        int opt1 = (!one.empty()) ? one[0] : INT_MAX;
+        // remove 2 smallest r=2  => 4
+        int opt2 = (two.size() >= 2) ? two[0] + two[1] : INT_MAX;
+        res -= min(opt1, opt2);
+    } else {  // r=2
+        // remove smalleset r2
+        int opt1 = (!two.empty()) ? two[0] : INT_MAX;
+        // remove 2 smallest r1
+        int opt2 = (one.size() >= 2) ? one[0] + one[1] : INT_MAX;
+        res -= min(opt1, opt2);
+    }
+
+    return res;
+}
+int main() {
     return 0;
 }
 
@@ -670,13 +552,7 @@ class Solution {
  * =================================================================================================
  */
 
-#include <iostream>
-#include <vector>
-#include <string>
-
-using namespace std;
-int countCollisions(string directions)
-{
+int countCollisions(string directions) {
     int n = directions.size();
     int left = 0, right = n - 1;
 
@@ -686,18 +562,12 @@ int countCollisions(string directions)
         right--;
 
     int collisions = 0;
-    for (int i = left; i <= right; i++)
-    {
+    for (int i = left; i <= right; i++) {
         if (directions[i] != 'S')
             collisions++;
     }
 
     return collisions;
-}
-
-int main()
-{
-    return 0;
 }
 
 /**
@@ -706,35 +576,23 @@ int main()
  * =================================================================================================
  */
 
-#include <iostream>
-#include <vector>
-#include <climits>
-#include <algorithm>
-using namespace std;
-
-int minOperations(vector<int> &nums)
-{
+int minOperations(vector<int>& nums) {
     int n = nums.size(), minLen = INT_MAX;
 
     int countOnes = 0;
-    for (int i = 0; i < n; ++i)
-    {
+    for (int i = 0; i < n; ++i) {
         if (nums[i] == 1)
             countOnes++;
     }
     if (countOnes > 0)
         return n - countOnes;
 
-    for (int i = 0; i < n; ++i)
-    {
-
+    for (int i = 0; i < n; ++i) {
         int tmp = nums[i];
-        for (int j = i + 1; j < n; ++j)
-        {
+        for (int j = i + 1; j < n; ++j) {
             tmp = __gcd(tmp, nums[j]);
 
-            if (tmp == 1)
-            {
+            if (tmp == 1) {
                 minLen = min(minLen, j - i + 1);
                 break;
             }
@@ -744,11 +602,6 @@ int minOperations(vector<int> &nums)
     if (minLen == INT_MAX)
         return -1;
     return minLen + n - 2;
-}
-
-int main()
-{
-    return 0;
 }
 
 /**

@@ -272,7 +272,6 @@ class Solution {
     }
 };
 
-
 // c2
 class Solution {
     unordered_set<string> dict;
@@ -318,8 +317,6 @@ C3 (string_view + unordered_set): 144 ms | 37.2 MB
 
 C1 (Trie): 43 ms | 74.2 MB
 */
-#include <bits/stdc++.h>
-using namespace std;
 
 class Solution {
     struct Node {
@@ -372,7 +369,7 @@ class Solution {
     }
 };
 
-//c2
+// c2
 class Solution {
    public:
     string replaceWords(vector<string>& dictionary, string sentence) {
@@ -403,7 +400,7 @@ class Solution {
     }
 };
 
-//c3
+// c3
 
 class Solution {
    public:
@@ -425,7 +422,7 @@ class Solution {
             bool replaced = false;
 
             for (size_t k = 0; k < word.length(); ++k) {
-                prefix = word.substr(0, k + 1);  
+                prefix = word.substr(0, k + 1);
                 if (roots.count(prefix)) {
                     if (!first) res += ' ';
                     first = false;
@@ -451,12 +448,10 @@ class Solution {
  * =================================================================================================
  */
 
-#include<bits/stdc++.h>
-using namespace std;
-
 class MapSum {
    private:
     unordered_map<string, int> t;
+
    public:
     MapSum() {}
     void insert(string key, int val) { t[key] = val; }
@@ -464,7 +459,7 @@ class MapSum {
         int res = 0;
 
         for (auto& [key, val] : t) {
-            if (key.rfind(prefix, 0) == 0) {  
+            if (key.rfind(prefix, 0) == 0) {
                 // no start with funciton so use rfind
                 // find prefix in key, from position 0
                 res += val;
@@ -481,8 +476,7 @@ class MapSum {
  * int param_2 = obj->sum(prefix);
  */
 
-
-//c2
+// c2
 
 class MapSum {
     struct Node {
@@ -496,7 +490,7 @@ class MapSum {
     int dfsSum(Node* node) {
         if (!node) return 0;
         int total = node->val;
-        for (int i = 0; i < 26; ++i) 
+        for (int i = 0; i < 26; ++i)
             total += dfsSum(node->child[i]);
         return total;
     }
@@ -524,51 +518,52 @@ class MapSum {
     }
 };
 
-    struct TrieNode {
-        TrieNode* child[26];
-        int sum;  // Tổng giá trị của tất cả các key đi qua node này
-        TrieNode() : sum(0) {
-            fill(child, child + 26, nullptr);
-        }
-    };
-
-    TrieNode* root;
-    unordered_map<string, int> mp;  // Lưu key -> val để xử lý ghi đè
-
-   public:
-    MapSum() {
-        root = new TrieNode();
-    }
-
-    void insert(string key, int val) {
-        int diff = val;
-        // Nếu key đã tồn tại, hiệu số cần cập nhật là (val - val_cũ)
-        if (mp.count(key)) {
-            diff = val - mp[key];
-        }
-        mp[key] = val;  // Cập nhật lại giá trị mới
-
-        TrieNode* cur = root;
-        for (char c : key) {
-            int idx = c - 'a';
-            if (!cur->child[idx]) {
-                cur->child[idx] = new TrieNode();
-            }
-            cur = cur->child[idx];
-            cur->sum += diff;  // Cộng phần chênh lệch vào mọi node trên đường đi
-        }
-    }
-
-    int sum(string prefix) {
-        TrieNode* cur = root;
-        for (char c : prefix) {
-            int idx = c - 'a';
-            if (!cur->child[idx]) return 0;  // Không có prefix này
-            cur = cur->child[idx];
-        }
-        return cur->sum;  // Trả về tổng đã lưu sẵn ở node cuối cùng của prefix
+struct TrieNode {
+    TrieNode* child[26];
+    int sum;  // Tổng giá trị của tất cả các key đi qua node này
+    TrieNode() : sum(0) {
+        fill(child, child + 26, nullptr);
     }
 };
+
+TrieNode* root;
+unordered_map<string, int> mp;  // Lưu key -> val để xử lý ghi đè
+
+public:
+MapSum() {
+    root = new TrieNode();
+}
+
+void insert(string key, int val) {
+    int diff = val;
+    // Nếu key đã tồn tại, hiệu số cần cập nhật là (val - val_cũ)
+    if (mp.count(key)) {
+        diff = val - mp[key];
+    }
+    mp[key] = val;  // Cập nhật lại giá trị mới
+
+    TrieNode* cur = root;
+    for (char c : key) {
+        int idx = c - 'a';
+        if (!cur->child[idx]) {
+            cur->child[idx] = new TrieNode();
+        }
+        cur = cur->child[idx];
+        cur->sum += diff;  // Cộng phần chênh lệch vào mọi node trên đường đi
+    }
+}
+
+int sum(string prefix) {
+    TrieNode* cur = root;
+    for (char c : prefix) {
+        int idx = c - 'a';
+        if (!cur->child[idx]) return 0;  // Không có prefix này
+        cur = cur->child[idx];
+    }
+    return cur->sum;  // Trả về tổng đã lưu sẵn ở node cuối cùng của prefix
+}
+}
+;
 
 /**
  * =================================================================================================
@@ -624,8 +619,6 @@ class Solution {
         return res;
     }
 };
-
-
 
 // c2
 class Solution {
@@ -803,7 +796,6 @@ class Solution {
         return res;
     }
 };
-
 
 //==========================================
 class Solution {

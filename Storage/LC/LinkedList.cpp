@@ -10,25 +10,19 @@ using namespace std;
 // Rotate List
 // Solution: Circular Linked List and return new head
 
-#include <iostream>
-using namespace std;
-
-struct ListNode
-{
+struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
-ListNode *rotateRight(ListNode *head, int k)
-{
+ListNode* rotateRight(ListNode* head, int k) {
     if (head == nullptr || head->next == nullptr)
-        return head; // edge case
+        return head;  // edge case
 
     int n = 1;
-    ListNode *end = head;
-    while (end->next != nullptr)
-    {
+    ListNode* end = head;
+    while (end->next != nullptr) {
         end = end->next;
         n++;
     }
@@ -40,19 +34,13 @@ ListNode *rotateRight(ListNode *head, int k)
     // circular
     end->next = head;
 
-    ListNode *t = head; // new tail
-    for (int i = 0; i < n - k - 1; ++i)
-    {
+    ListNode* t = head;  // new tail
+    for (int i = 0; i < n - k - 1; ++i) {
         t = t->next;
     }
-    ListNode *res = t->next;
+    ListNode* res = t->next;
     t->next = nullptr;
     return res;
-}
-
-int main()
-{
-    return 0;
 }
 
 /**
@@ -61,27 +49,21 @@ int main()
  * =================================================================================================
  */
 
-#include <iostream>
-using namespace std;
-
-struct ListNode
-{
+struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
 // Floyd's Cycle Detection (Two Pointers) - Recommended
-bool hasCycle(ListNode *head)
-{
+bool hasCycle(ListNode* head) {
     if (head == nullptr || head->next == nullptr)
         return false;
 
-    ListNode *slow = head;
-    ListNode *fast = head;
+    ListNode* slow = head;
+    ListNode* fast = head;
 
-    while (fast != nullptr && fast->next != nullptr)
-    {
+    while (fast != nullptr && fast->next != nullptr) {
         slow = slow->next;
         fast = fast->next->next;
 
@@ -92,21 +74,17 @@ bool hasCycle(ListNode *head)
     return false;
 }
 
-int main()
-{
+int main() {
     // Example usage:
-    ListNode *head = new ListNode(3);
+    ListNode* head = new ListNode(3);
     head->next = new ListNode(2);
     head->next->next = new ListNode(0);
     head->next->next->next = new ListNode(-4);
-    head->next->next->next->next = head->next; // Creates a cycle
+    head->next->next->next->next = head->next;  // Creates a cycle
 
-    if (hasCycle(head))
-    {
+    if (hasCycle(head)) {
         cout << "Cycle detected!" << endl;
-    }
-    else
-    {
+    } else {
         cout << "No cycle." << endl;
     }
 

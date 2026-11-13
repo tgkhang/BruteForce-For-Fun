@@ -7,23 +7,17 @@ using namespace std;
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-int lengthOfLongestSubstring(string s)
-{
-    unordered_map<char, int> lastIndex; // Map to store the last seen index of each character
+int lengthOfLongestSubstring(string s) {
+    unordered_map<char, int> lastIndex;  // Map to store the last seen index of each character
     int res = 0;
-    int l = 0; // Left pointer of the sliding window
+    int l = 0;  // Left pointer of the sliding window
 
-    for (int r = 0; r < s.length(); r++)
-    {
+    for (int r = 0; r < s.length(); r++) {
         // r is the right pointer of the sliding window
         char currentChar = s[r];
 
         // If we have seen the character before, move the left pointer
-        if (lastIndex.find(currentChar) != lastIndex.end() && lastIndex[currentChar] >= l)
-        {
+        if (lastIndex.find(currentChar) != lastIndex.end() && lastIndex[currentChar] >= l) {
             // Move the left pointer to one past the previous index of the current character
             l = lastIndex[currentChar] + 1;
         }
@@ -38,11 +32,6 @@ int lengthOfLongestSubstring(string s)
     return res;
 }
 
-int main()
-{
-    return 0;
-}
-
 /**
  * =================================================================================================
  * 5. Longest Palindromic Substring
@@ -54,40 +43,30 @@ Input: s = "babad"
 Output: "bab"
 */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-string longestPalindrome(string s)
-{
+string longestPalindrome(string s) {
     int n = s.length();
     if (n == 0)
         return "";
 
     int start = 0;
-    int maxLen =1;
+    int maxLen = 1;
 
-
-    auto expandAroundCenter = [&](int left, int right)
-    {
-        while (left >= 0 && right < n && s[left] == s[right])
-        {
+    auto expandAroundCenter = [&](int left, int right) {
+        while (left >= 0 && right < n && s[left] == s[right]) {
             left--;
             right++;
         }
         return right - left - 1;
     };
 
+    for (int i = 0; i < n; i++) {
+        int len1 = expandAroundCenter(i, i);  // case string has the middle character
 
-    for (int i = 0; i < n; i++)
-    {
-        int len1 = expandAroundCenter(i, i); //case string has the middle character 
-
-        int len2 = expandAroundCenter(i, i + 1); // case string not has the middle character
+        int len2 = expandAroundCenter(i, i + 1);  // case string not has the middle character
 
         int len = max(len1, len2);
 
-        if (len > maxLen)
-        {
+        if (len > maxLen) {
             maxLen = len;
             start = i - (maxLen - 1) / 2;
         }
@@ -96,8 +75,7 @@ string longestPalindrome(string s)
     return s.substr(start, maxLen);
 }
 
-int main()
-{
+int main() {
     string s = "babad";
 
     cout << longestPalindrome(s);
@@ -191,28 +169,20 @@ Input: s = "the sky is blue"
 Output: "blue is sky the"
 */
 
-#include <iostream>
-#include <bits/stdc++.h>
-using namespace std;
-
-string reverseWords(string s)
-{
+string reverseWords(string s) {
     int n = s.size();
     reverse(s.begin(), s.end());
 
     int finalIndex = 0;
 
-    for (int i = 0; i < n; ++i)
-    {
-        if (s[i] != ' ')
-        {
+    for (int i = 0; i < n; ++i) {
+        if (s[i] != ' ') {
             // space
             if (finalIndex != 0) s[finalIndex++] = ' ';
             int wordStart = finalIndex;
             int j = i;
 
-            while (j < n && s[j] != ' ')
-            {
+            while (j < n && s[j] != ' ') {
                 s[finalIndex++] = s[j++];
             }
 
@@ -227,8 +197,7 @@ string reverseWords(string s)
     return s;
 }
 
-int main()
-{
+int main() {
     string s = "the sky is blue";
     s = reverseWords(s);
     cout << s;
@@ -241,20 +210,13 @@ int main()
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-
-using namespace std;
-
-static bool comp(string a, string b)
-{
+static bool comp(string a, string b) {
     // return a<b; // 10 > 2
     return a + b > b + a;
 }
-string largestNumber(vector<int> &nums)
-{
+string largestNumber(vector<int>& nums) {
     vector<string> s;
-    for (auto i : nums)
-    {
+    for (auto i : nums) {
         s.push_back(to_string(i));
     }
 
@@ -274,8 +236,7 @@ string largestNumber(vector<int> &nums)
     return res;
 }
 
-int main()
-{
+int main() {
     // vector<int> a = {3, 30, 34, 5, 9};
     vector<int> a = {10, 2};
     cout << largestNumber(a);
@@ -294,11 +255,7 @@ Input: num = 1234567
 Output: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
 */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-string basecaseHelper(int num)
-{
+string basecaseHelper(int num) {
     // num< 1000
     string digit1[] = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
     string digitTeen[] = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
@@ -306,8 +263,7 @@ string basecaseHelper(int num)
 
     string res = "";
 
-    if (num > 99)
-    {
+    if (num > 99) {
         // has hunred in num
         res += digit1[num / 100] + " Hundred ";
     }
@@ -315,12 +271,9 @@ string basecaseHelper(int num)
     num %= 100;
 
     // teen
-    if (num < 20 && num > 9)
-    {
+    if (num < 20 && num > 9) {
         res += digitTeen[num - 10] + " ";
-    }
-    else
-    {
+    } else {
         if (num >= 20)
             res += digit2[num / 10] + " ";
 
@@ -334,9 +287,7 @@ string basecaseHelper(int num)
     return res;
 }
 
-string intToEnglishWords(int num)
-{
-
+string intToEnglishWords(int num) {
     if (num == 0)
         return "Zero";
 
@@ -344,10 +295,8 @@ string intToEnglishWords(int num)
     string res = basecaseHelper(num % 1000);
 
     // iter through thousand mil and bil (reverse)
-    for (int i = 0; i < 3; ++i)
-    {
-        if (num > 0 && num % 1000 > 0)
-        {
+    for (int i = 0; i < 3; ++i) {
+        if (num > 0 && num % 1000 > 0) {
             res = basecaseHelper(num % 1000) + big[i] + " " + res;
         }
         num /= 1000;
@@ -356,8 +305,7 @@ string intToEnglishWords(int num)
     return res;
 }
 
-int main()
-{
+int main() {
     int num = 1234567;
     cout << intToEnglishWords(num);
     return 0;
@@ -369,31 +317,23 @@ int main()
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-string removeKdigits(string num, int k)
-{
+string removeKdigits(string num, int k) {
     stack<char> st;
-    for (auto i : num)
-    {
-        while (!st.empty() && i < st.top() && k > 0)
-        {
+    for (auto i : num) {
+        while (!st.empty() && i < st.top() && k > 0) {
             k--;
             st.pop();
         }
         st.push(i);
     }
 
-    while (k != 0 && !st.empty())
-    {
+    while (k != 0 && !st.empty()) {
         st.pop();
         k--;
     }
 
     string res = "";
-    while (!st.empty())
-    {
+    while (!st.empty()) {
         res = st.top() + res;
         st.pop();
     }
@@ -413,22 +353,18 @@ string removeKdigits(string num, int k)
 }
 
 // faster version
-string removeKdigits1(string num, int k)
-{
+string removeKdigits1(string num, int k) {
     string result = "";
 
-    for (char digit : num)
-    {
-        while (!result.empty() && result.back() > digit && k > 0)
-        {
+    for (char digit : num) {
+        while (!result.empty() && result.back() > digit && k > 0) {
             result.pop_back();
             k--;
         }
         result.push_back(digit);
     }
 
-    while (k > 0 && !result.empty())
-    {
+    while (k > 0 && !result.empty()) {
         result.pop_back();
         k--;
     }
@@ -441,8 +377,7 @@ string removeKdigits1(string num, int k)
     return result.empty() ? "0" : result;
 }
 
-int main()
-{
+int main() {
     string num = "1432219";
     int k = 3;
 
@@ -456,11 +391,7 @@ int main()
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-int strongPasswordChecker(string password)
-{
+int strongPasswordChecker(string password) {
     int n = password.length();
 
     bool digit = false, upper = false, lower = false;
@@ -475,8 +406,7 @@ int strongPasswordChecker(string password)
     //     lower = true;
     // }
 
-    for (char c : password)
-    {
+    for (char c : password) {
         if (islower(c))
             lower = true;
         if (isupper(c))
@@ -489,43 +419,37 @@ int strongPasswordChecker(string password)
 
     int change = 0, one = 0, two = 0;
 
-    for (int i = 2; i < n; ++i)
-    {
-        if (password[i] == password[i - 1] && password[i - 1] == password[i - 2])
-        {
+    for (int i = 2; i < n; ++i) {
+        if (password[i] == password[i - 1] && password[i - 1] == password[i - 2]) {
             int j = i;
             // Find the end of this repeating sequence
-            while (j < n && password[j] == password[i - 2])
-            {
+            while (j < n && password[j] == password[i - 2]) {
                 j++;
             }
             int len = j - (i - 2);
 
-            change += len / 3; // Each 'aaa' sequence needs one replacement
+            change += len / 3;  // Each 'aaa' sequence needs one replacement
 
             if (len % 3 == 0)
-                one++; //  'aaa', 'aaaaaa'
+                one++;  //  'aaa', 'aaaaaa'
             else if (len % 3 == 1)
-                two++; //  'aaaa', 'aaaaaaa'
+                two++;  //  'aaaa', 'aaaaaaa'
 
-            i = j - 1; // Move index to the end of the processed sequence
+            i = j - 1;  // Move index to the end of the processed sequence
         }
     }
 
     // Case 1: Password is too short
-    if (n < 6)
-    {
+    if (n < 6) {
         return max(missing, 6 - n);
     }
     // Case 2: Password length is in the ideal range
-    else if (n <= 20)
-    {
+    else if (n <= 20) {
         return max(missing, change);
     }
     // Case 3: Password is too long
-    else
-    {
-        int del = n - 20; // Number of characters we must delete to reach max length of 20.
+    else {
+        int del = n - 20;  // Number of characters we must delete to reach max length of 20.
         /*
         KEY INSIGHT: Deletions help us fix repeating sequences!
         Instead of: Delete + Replace, we can sometimes just: Delete only!
@@ -545,7 +469,7 @@ int strongPasswordChecker(string password)
         */
 
         // Priority 1: Use 1 deletion to fix a 'len % 3 == 0' sequence. Most efficient.
-        change -= min(del, one); // instead of changing the char, we can just del where I need to del 1 chars
+        change -= min(del, one);  // instead of changing the char, we can just del where I need to del 1 chars
 
         // Priority 2: Use 2 deletions to fix a 'len % 3 == 1' sequence.
         change -= min(max(0, del - one), two * 2) / 2;
@@ -558,8 +482,7 @@ int strongPasswordChecker(string password)
     }
 }
 
-int main()
-{
+int main() {
     string password = "aA1";
     cout << strongPasswordChecker(password);
     return 0;
@@ -583,26 +506,18 @@ Input: s1 = "acb", n1 = 1, s2 = "acb", n2 = 1
 Output: 1
 */
 
-#include <bits/stdc++.h>
-
-using namespace std;
-
-int getMaxRepetitions(string s1, int n1, string s2, int n2)
-{
+int getMaxRepetitions(string s1, int n1, string s2, int n2) {
     int l1 = s1.length(), l2 = s2.length();
 
     int res = 0;
     int t = 0;
 
     for (int i = 0; i < n1; ++i)
-        for (int j = 0; j < l1; ++j)
-        {
-            if (s1[j] == s2[t])
-            {
+        for (int j = 0; j < l1; ++j) {
+            if (s1[j] == s2[t]) {
                 t++;
                 // if (t == l2 - 1)
-                if (t == l2)
-                {
+                if (t == l2) {
                     res++;
                     t = 0;
                 }
@@ -612,8 +527,7 @@ int getMaxRepetitions(string s1, int n1, string s2, int n2)
     return res / n2;
 }
 
-int main()
-{
+int main() {
     string s1 = "acb", s2 = "ab";
     int n1 = 4, n2 = 2;
 
@@ -627,22 +541,14 @@ int main()
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-int minDeletionSize944(vector<string> &strs)
-{
-
+int minDeletionSize944(vector<string>& strs) {
     int r = strs.size();
     int c = strs[0].length();
 
     int res = 0;
-    for (int i = 0; i < c; ++i)
-    {
-        for (int j = 0; j < r - 1; ++j)
-        {
-            if (strs[j][i] > strs[j + 1][i])
-            {
+    for (int i = 0; i < c; ++i) {
+        for (int j = 0; j < r - 1; ++j) {
+            if (strs[j][i] > strs[j + 1][i]) {
                 res++;
                 break;
             }
@@ -651,8 +557,7 @@ int minDeletionSize944(vector<string> &strs)
     return res;
 }
 
-int minDeletionSize995(vector<string> &strs)
-{
+int minDeletionSize995(vector<string>& strs) {
     int r = strs.size();
     int c = strs[0].length();
     int res = 0;
@@ -660,23 +565,20 @@ int minDeletionSize995(vector<string> &strs)
     // sorted[i] = true: strs[i] đã < strs[i+1] khi duyệt đến cột hiện tại
     vector<bool> sorted(r - 1, false);
 
-    for (int i = 0; i < c; ++i)
-    {
-        bool needDelete = false;        // do we need to delete this column?
-        for (int j = 0; j < r - 1; ++j) // hàng
+    for (int i = 0; i < c; ++i) {
+        bool needDelete = false;         // do we need to delete this column?
+        for (int j = 0; j < r - 1; ++j)  // hàng
         {
-            if (!sorted[j] && strs[j][i] > strs[j + 1][i])
-            {
+            if (!sorted[j] && strs[j][i] > strs[j + 1][i]) {
                 needDelete = true;
                 break;
             }
         }
         if (needDelete)
             res++;
-        else // cột này không bị xóa
+        else  // cột này không bị xóa
         {
-            for (int row = 0; row < r - 1; ++row)
-            {
+            for (int row = 0; row < r - 1; ++row) {
                 if (strs[row][i] < strs[row + 1][i])
                     sorted[row] = true;
             }
@@ -687,23 +589,17 @@ int minDeletionSize995(vector<string> &strs)
 }
 
 // 960
-int minDeletionSize960(vector<string> &strs)
-{
+int minDeletionSize960(vector<string>& strs) {
     int r = strs.size();
     int c = strs[0].length();
 
     vector<int> tmp(c, 1);
 
-    for (int i = 0; i < c; ++i)
-    {
-        for (int j = 0; j < i; ++j)
-        {
+    for (int i = 0; i < c; ++i) {
+        for (int j = 0; j < i; ++j) {
             bool canPlaceAfter = true;
-            for (int k = 0; k < r; ++k)
-            {
-
-                if (strs[k][i] < strs[k][j])
-                {
+            for (int k = 0; k < r; ++k) {
+                if (strs[k][i] < strs[k][j]) {
                     canPlaceAfter = false;
                     break;
                 }
@@ -719,35 +615,22 @@ int minDeletionSize960(vector<string> &strs)
     return c - res;
 }
 
-int main()
-{
-}
-
 /**
  * =================================================================================================
  * 1513. Number of Substrings With Only 1s
  * =================================================================================================
  */
 
-#include <iostream>
-#include <vector>
-#include <string>
-
-using namespace std;
-
 const int MOD = 1e9 + 7;
 
-int numSub(string s)
-{
+int numSub(string s) {
     vector<int> tmp;
 
     long long t = s[0] == '0' ? 0 : 1;
-    for (auto i = 1; i < s.size(); ++i)
-    {
+    for (auto i = 1; i < s.size(); ++i) {
         if (s[i] == '1')
             t++;
-        else
-        {
+        else {
             if (t > 0)
                 tmp.push_back(t);
             t = 0;
@@ -765,30 +648,23 @@ int numSub(string s)
     return res;
 }
 
-int main()
-{
+int main() {
     string s = "0110111";
     cout << numSub(s) << endl;
     return 0;
 }
 
-
 // sum 1+2+...+n = n(n+1)/2
-int numSub1(string s)
-{
+int numSub1(string s) {
     const int MOD = 1e9 + 7;
     long long res = 0;
     int count = 0;
 
-    for (char c : s)
-    {
-        if (c == '1')
-        {
+    for (char c : s) {
+        if (c == '1') {
             count++;
             res = (res + count) % MOD;
-        }
-        else
-        {
+        } else {
             count = 0;
         }
     }
@@ -802,21 +678,15 @@ int numSub1(string s)
  * =================================================================================================
  */
 
-#include <bits/stdc++.h>
-using namespace std;
-int countPalindromicSubsequence(string s)
-{
+int countPalindromicSubsequence(string s) {
     int n = s.length();
     int res = 0;
 
-    for (char c = 'a'; c <= 'z'; ++c)
-    {
+    for (char c = 'a'; c <= 'z'; ++c) {
         int first = -1, last = -1;
 
-        for (int i = 0; i < n; ++i)
-        {
-            if (s[i] == c)
-            {
+        for (int i = 0; i < n; ++i) {
+            if (s[i] == c) {
                 if (first == -1)
                     first = i;
                 last = i;
@@ -824,8 +694,7 @@ int countPalindromicSubsequence(string s)
         }
 
         // has middle -> has palindrome
-        if (first != -1 && last > first)
-        {
+        if (first != -1 && last > first) {
             unordered_set<char> t;
             for (int i = first + 1; i < last; ++i)
                 t.insert(s[i]);
@@ -836,8 +705,7 @@ int countPalindromicSubsequence(string s)
     return res;
 }
 
-int main()
-{
+int main() {
     string s;
     cin >> s;
     cout << countPalindromicSubsequence(s) << endl;
